@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>爱丽屋</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <link rel="stylesheet" type="text/css" href="../css/reset.css">
+	<link rel="stylesheet" type="text/css" href="../css/main.css">
+    <script type="text/javascript" src="../js/jquery-3.1.1.min.js"></script>
+	<script type="text/javascript" src="../js/main.js"></script>
+	<script type="text/javascript" src="../js/sty.js"></script>
+</head>
+<body>
+<div class="container padding-40">
+    <div class="input-list">
+        <label for="name">姓名</label>
+        <input id="name" >
+    </div>
+    <div class="input-list">
+        <label for="phone">手机号码</label>
+        <input id="phone" >
+    </div>
+    <div class="input-list">   
+        <label for="password">密码</label>
+        <input id="password" type="password">
+    </div>
+    <button class="btn-large primary-btn" style="margin-top:0.1rem">登录</button>
+</div>
+</body>
+<script type="text/javascript">
+
+    $(document).ready(function(){
+
+        function checkphone(){
+           var phoneNum = $('#phone').val();
+           var myreg = /^(((13[0-9]{1})|(14[0-9]{1})|(17[0]{1})|(15[0-3]{1})|(15[5-9]{1})|(18[0-9]{1}))+\d{8})$/;
+
+           if(phoneNum.length>=0&&phoneNum.length<11){
+                sty.Toast('手机号不正确');
+                return false;
+            }else if(phoneNum.length>11){
+                sty.Toast('手机号不正确');
+                return false;
+            }else if(myreg.test(phoneNum)){
+                return true;
+            }
+       }
+
+       function checkname(){
+           var name = $('#name').val();
+           if(name.length==0){
+            sty.Toast('姓名不能为空');
+            return false;
+           }else{
+            return true;
+           }
+           
+        }
+        function checkpassword(){
+           var name = $('#password').val();
+           if(name.length==0){
+            sty.Toast('密码不能为空');
+            return false;
+           }else{
+            return true;
+           }
+           
+        }
+
+        $('.primary-btn').on('click',function(){
+           var flag =  checkname()&&checkphone()&&checkpassword;
+           if(flag){
+                sty.Toast('登录成功');
+                var t = setTimeout(function(){
+                    window.location.href = 'personalCenter_w.html'
+                },1000);
+           }
+        })
+       
+    })
+
+</script>
+</html>

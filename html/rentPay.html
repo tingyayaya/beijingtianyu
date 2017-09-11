@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>爱丽屋</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <link rel="stylesheet" type="text/css" href="../css/reset.css">
+	<link rel="stylesheet" type="text/css" href="../css/main.css">
+    <script type="text/javascript" src="../js/jquery-3.1.1.min.js"></script>
+	<script type="text/javascript" src="../js/main.js"></script>
+	<script type="text/javascript" src="../js/sty.js"></script>
+</head>
+<body class="grey-bg">
+<div class="position-fixed">
+    <div class="card-list card-bottom head-label">
+        <i class="icon-label icon-3 pull-left"></i>
+        <span class="label-title">教工家园-20幢2单元0601号</span>
+        <span class="secondary-text">3200元/月</span>
+    </div>
+    <ul class="tab-lower-line">
+        <li class="tab-active">未支付</li>
+        <li>已支付</li>
+    </ul>
+</div>
+
+<div class="contain-margin2">
+    <div class="tab-list tab-zhifu">
+        <ul>
+            <span>2017年7月</span>
+            <li>
+                <input type="checkbox" class="check1">
+                <b class="tab-list-main">￥2056</b>
+                <span class="tab-list-name">房屋租金</span>
+                <span class="small-text tab-list-second">2017-06</span>
+                <a class="warning-text">未支付</a>
+            </li>
+            <li>
+                <input type="checkbox" class="check1">
+                <b class="tab-list-main">￥360</b>
+                <span class="tab-list-name">杂费</span>
+                <span class="small-text tab-list-second">2017-06</span>
+                 <a class="warning-text">未支付</a>
+            </li>
+        </ul>
+        <ul>
+            <span>2017年7月</span>
+            <li>
+                <input type="checkbox" class="check1">
+                <b class="tab-list-main">￥2056</b>
+                <span class="tab-list-name">房屋租金</span>
+                <span class="small-text tab-list-second">2017-06</span>
+                <a class="warning-text">未支付</a>
+            </li>
+            <li>
+                <input type="checkbox" class="check1">
+                <b class="tab-list-main">￥360</b>
+                <span class="tab-list-name">杂费</span>
+                <span class="small-text tab-list-second">2017-06</span>
+                 <a class="warning-text">未支付</a>
+            </li>
+        </ul>
+        <ul>
+            <span>2017年7月</span>
+            <li>
+                <input type="checkbox" class="check1">
+                <b class="tab-list-main">￥2056</b>
+                <span class="tab-list-name">房屋租金</span>
+                <span class="small-text tab-list-second">2017-06</span>
+                <a class="warning-text">未支付</a>
+            </li>
+            <li>
+                <input type="checkbox" class="check1">
+                <b class="tab-list-main">￥360</b>
+                <span class="tab-list-name">杂费</span>
+                <span class="small-text tab-list-second">2017-06</span>
+                 <a class="warning-text">未支付</a>
+            </li>
+        </ul>
+        <ul>
+            <span>2017年7月</span>
+            <li>
+                <input type="checkbox" class="check1">
+                <b class="tab-list-main">￥2056</b>
+                <span class="tab-list-name">房屋租金</span>
+                <span class="small-text tab-list-second">2017-06</span>
+                <a class="warning-text">未支付</a>
+            </li>
+            <li>
+                <input type="checkbox" class="check1">
+                <b class="tab-list-main">￥360</b>
+                <span class="tab-list-name">杂费</span>
+                <span class="small-text tab-list-second">2017-06</span>
+                 <a class="warning-text">未支付</a>
+            </li>
+        </ul>
+    </div>
+    <footer id="footer" class="footer-tab">
+            <input type="checkbox" class="check2">
+            <span class="checkname">全选</span>
+            <button class="btn-right pull-right marginLeft">去支付</button>
+            <span class="pull-right auxiliary-text">已选<span class="checknum">0</span>条</span>
+    </footer>
+</div>
+
+<div class="contain-margin2  hide">
+    <div class="tab-list tab-mingxi">
+        <ul>
+            <span>2017年7月</span>
+            <li>
+                <span class="tab-list-name">房屋租金</span>
+                <span class="small-text tab-list-second">2017-06</span>
+                <b class="tab-list-main">￥2056</b>
+            </li>
+            <li>
+                <span class="tab-list-name">杂费</span>
+                <span class="small-text tab-list-second">2017-06</span>
+                <b class="tab-list-main">￥360</b>
+            </li>
+        </ul>
+        <ul>
+            <span>2017年7月</span>
+            <li>
+                <span class="tab-list-name">房屋租金</span>
+                <span class="small-text tab-list-second">2017-06</span>
+                <b class="tab-list-main">￥2056</b>
+            </li>
+            <li>
+                <span class="tab-list-name">杂费</span>
+                <span class="small-text tab-list-second">2017-06</span>
+                <b class="tab-list-main">￥360</b>
+            </li>
+        </ul>
+    </div>
+</div>
+
+</body>
+<script type="text/javascript" src="../js/aui-tab.js" ></script>
+<script type="text/javascript">
+    var tab = new auiTab({
+        element: $('.tab-lower-line')[0], //document.getElementById("footer")
+        index:1,
+        repeatClick:false
+    },function(ret){
+        if(ret.index==2){
+            $('.contain-margin2').eq(0).addClass('hide');
+            $('.contain-margin2').eq(1).removeClass('hide');
+           
+        }else if(ret.index==1){
+            $('.contain-margin2').eq(1).addClass('hide');
+            $('.contain-margin2').eq(0).removeClass('hide');
+        }
+    });
+    
+    $('.check2').on('click',function(){
+        if(this.checked){
+            $('.check1').each(function () {  
+                $(this).prop("checked", true);  
+            });
+        }else{
+            $('.check1').each(function () {  
+                $(this).prop("checked", false); 
+            });
+        }
+        chknum();
+    })
+    
+    function chknum(){
+        var chknum=0;
+        $('.check1').each(function(){
+            if($(this).prop('checked')==true){
+                chknum++;
+                
+            }
+        })
+        $('.checknum').html(chknum);
+    }
+    
+    $('.check1').on('click',function(){
+        chknum();
+    })
+</script>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>爱丽屋</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <link rel="stylesheet" type="text/css" href="../css/reset.css">
+	<link rel="stylesheet" type="text/css" href="../css/main.css">
+    <script type="text/javascript" src="../js/jquery-3.1.1.min.js"></script>
+	<script type="text/javascript" src="../js/main.js"></script>
+	<script type="text/javascript" src="../js/sty.js"></script>
+</head>
+<body>
+<ul class="tab-lower-line position-fixed">
+    <li class="tab-active">未签约</li>
+    <li>已签约</li>
+</ul>
+<div class="tab-list tab-mingxi contain-margin">
+    <ul>
+        <span>租赁</span>
+        <li>
+            <span class="tab-list-name">金泰丽富3楼5单元1604</span>
+            <span class="small-text tab-list-second">2017-06</span>
+        </li>
+        <li class="item-loss">
+            <span class="tab-list-name">金泰丽富3楼5单元1604</span>
+            <span class="small-text tab-list-second">2017-06</span>
+            <span class="tab-list-loss">已失效</span>
+        </li>
+    </ul>
+    <ul>
+        <span>代理</span>
+        <li>
+            <span class="tab-list-name">金泰丽富3楼5单元1604</span>
+            <span class="small-text tab-list-second">2017-06</span>
+          
+        </li>
+        <li>
+            <span class="tab-list-name">金泰丽富3楼5单元1604</span>
+            <span class="small-text tab-list-second">2017-06</span>
+          
+        </li>
+    </ul>
+    <ul>
+        <span>居间</span>
+        <li>
+            <span class="tab-list-name">金泰丽富3楼5单元1604</span>
+            <span class="small-text tab-list-second">2017-06</span>
+        </li>
+    
+    </ul>
+
+</div>
+<footer id="footer">
+    <button class="primary-btn btn-large3 new-btn">新建合同</button>
+</footer>
+</body>
+<script type="text/javascript" src="../js/aui-tab.js" ></script>
+<script type="text/javascript">
+
+      $(document).ready(function(){
+        var tab = new auiTab({
+            element: $('.tab-lower-line')[0], //document.getElementById("footer")
+            index:1,
+            repeatClick:false
+        },function(ret){
+            console.log(ret);
+        });
+
+        $('.new-btn').on('click',function(){
+            window.location.href="chooseContract.html";
+        })
+    })
+    
+
+</script>
+</html>

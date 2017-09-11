@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>爱丽屋</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <link rel="stylesheet" type="text/css" href="../css/reset.css">
+	<link rel="stylesheet" type="text/css" href="../css/main.css">
+    <script type="text/javascript" src="../js/jquery-3.1.1.min.js"></script>
+	<script type="text/javascript" src="../js/main.js"></script>
+	<script type="text/javascript" src="../js/sty.js"></script>
+</head>
+<body>
+<div class="card-list">
+    <p class="auxiliary-text">预付金额</p>
+    <p class="deposit-m">200元</p>
+</div>
+
+<div class="card-list">
+    <button class="primary-btn btn-large2 btn-tijiao">提交</button>
+    <span class="secondary-text text-text">请在24小时内联系相关人员签约，办理租房事宜，否则视为违约，定金不退
+</span>
+</div>
+</body>
+<script type="text/javascript">
+
+    $(document).ready(function(){
+      $('.btn-tijiao').on('click',function(){
+            sty.Toast('提交成功');
+      })
+
+    })
+
+</script>
+</html>

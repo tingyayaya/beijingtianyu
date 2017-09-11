@@ -1,0 +1,105 @@
+body,ol,ul,h1,h2,h3,h4,h5,h6,p,th,td,dl,dd,form,fieldset,legend,input,textarea,select{margin:0;padding:0}
+body{font-family:"Hiragino Sans GB","Microsoft Yahei","Helvetica Neue",Helvetica,Arial,sans-serif;background:#fff;-webkit-text-size-adjust:100%;}
+ul li{
+    list-style-type:none;
+}
+
+a{text-decoration:none}
+a:hover{text-decoration:none !important}
+a:visited{text-decoration:none !important}
+a:link{text-decoration:none !important}
+a:active{text-decoration:none !important}
+
+ul li{
+    list-style-type:none;
+}
+em,i{font-style:normal}
+
+img{border:0;vertical-align:middle}
+
+table{border-collapse:collapse;border-spacing:0}
+
+*{
+    /*点击区域去掉颜色*/
+    -webkit-tap-highlight-color: transparent;
+}
+
+input, button, select, textarea {
+    outline: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border-radius: 0;
+    border: none;
+}
+
+/*最小字体的解决*/
+.light-font{
+   font-size:0.12rem;
+   -webkit-transform:scale(0.8);
+   display:inline-block;
+   -webkit-transform-origin-x: 0;
+}
+
+/*去除箭头*/
+input[type=number] {  
+    -moz-appearance:textfield;  
+}  
+input[type=number]::-webkit-inner-spin-button,  
+input[type=number]::-webkit-outer-spin-button {  
+    -webkit-appearance: none;  
+    margin: 0;  
+}
+
+/* ========
+    工具样式
+   ======== */
+
+.center-block{
+    display:block;
+    margin-right:auto;
+    margin-left:auto;
+}
+.pull-right {
+    float:right !important;
+}
+.pull-left {
+    float:left !important;
+}
+.text-right {
+    text-align:right !important;
+}
+.text-left{
+    text-align:left !important;
+}
+.text-center{
+    text-align:center !important;
+}
+
+.hide {
+    display:none !important;
+}
+.show {
+    display: block !important;
+}
+.invisible {
+    visibility: hidden;
+}
+.text-hide {
+    font: 0/0 a;
+    color: transparent;
+    text-shadow:none;
+    background-color:transparent;
+    border:0;
+
+}
+
+.clearfix:before,
+.clearfix:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+.clearfix:after {
+    clear: both;
+}

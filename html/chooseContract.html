@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>爱丽屋</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <link rel="stylesheet" type="text/css" href="../css/reset.css">
+	<link rel="stylesheet" type="text/css" href="../css/main.css">
+    <script type="text/javascript" src="../js/jquery-3.1.1.min.js"></script>
+	<script type="text/javascript" src="../js/main.js"></script>
+	<script type="text/javascript" src="../js/sty.js"></script>
+</head>
+<body>
+    <div class="container padding-40">
+        <h4 class="title">新建合同</h4>
+        <div class="input-list2">
+            <input type="radio" name="hetong" class="hetong" value="agent">
+            <span>代理合同</span>
+        </div>
+        <div class="input-list2">   
+            <input type="radio" name="hetong" class="hetong" value="lease">
+            <span>租赁合同</span>
+        </div>
+        <div class="input-list2">   
+            <input type="radio" name="hetong" class="hetong" value="mediacy">
+            <span>居间合同</span>
+        </div>
+        <button class="btn-large primary-btn" style="margin-top:0.4rem">提交</button>
+    </div>
+</body>
+<script type="text/javascript">
+
+    $(document).ready(function(){
+
+        $('.primary-btn').on('click',function(){
+           var s= $("input[type='radio']:checked").val();
+           if(s=='agent'){
+              window.location.href = "agentContract_w.html";
+           }else if(s=='lease'){
+              window.location.href = "leaseContract_w.html";
+           }else if(s=='mediacy'){
+              window.location.href = "mediacyContract_w.html";
+           }else{
+            sty.Toast('请选择其中一项');
+           }
+        })
+       
+    })
+
+</script>
+</html>

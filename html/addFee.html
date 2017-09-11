@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>爱丽屋</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <link rel="stylesheet" type="text/css" href="../css/reset.css">
+	<link rel="stylesheet" type="text/css" href="../css/main.css">
+    <script type="text/javascript" src="../js/jquery-3.1.1.min.js"></script>
+	<script type="text/javascript" src="../js/main.js"></script>
+	<script type="text/javascript" src="../js/sty.js"></script>
+</head>
+<body>
+<div class="list-one">
+    <span>费用金额</span>
+    <div>
+         <input type="text" placeholder="0.00" class="input-money">  
+    <span>元</span>
+    </div>
+</div>
+<ul class="list-two list-bottom">
+    <li>
+        <span>房屋租金</span>
+        <div>
+            <span class="list-info">4000</span>
+            <span>元</span>
+        </div>
+    </li>
+    <li>
+        <span>租约信息</span>
+        <div>
+            <span class="list-info">教工家园20幢 2单元0601室</span>
+        </div>
+    </li>
+</ul>
+<div class="item-imgs">
+    <span>备注（选填，上传凭证最多3张）</span>
+    <div class="itme-info">
+        <textarea name="" placeholder="100字以内" class="textnum" maxlength="100"></textarea>
+        <p class="auxiliary-text small-text pull-right"><span class="pnum">0</span>/100</p>
+    </div>
+    <div class="item-add">
+        <div class="imgdiv">
+            
+        </div>
+        <div class="filediv">
+            <img src="../imgs/addphone.png" alt="">
+            <input type="file" name="file" onchange="imgPreview(this)" />
+        </div>
+        <span>
+            添加煤气表的抄数照片等
+        </span>
+    </div>
+</div>
+<div class="card-list">
+    <button class="primary-btn btn-large2 btn-tijiao">提交</button>
+</div>
+</body>
+<script type="text/javascript">
+
+    $(document).ready(function(){
+       
+      $('.textnum').on('input',function(){
+        var num = $(this).val().length;
+        $('.pnum').html(num);
+      })
+      $('.btn-tijiao').on('click',function(){
+            sty.Toast('提交成功');
+      })
+
+    })
+
+    function imgPreview(fileDom){
+
+        //判断是否支持FileReader
+        if (window.FileReader) {
+            var reader = new FileReader();
+        } else {
+            alert("您的设备不支持图片预览功能，如需该功能请升级您的设备！");
+        }
+
+        //获取文件
+        var file = fileDom.files[0];
+        var imageType = /^image\//;
+        //是否是图片
+        if (!imageType.test(file.type)) {
+            alert("请选择图片！");
+            return;
+        }
+        //读取完成
+        reader.onload = function(e) {
+            var content = '<img src='+e.target.result+'>'
+            $('.imgdiv').append(content);
+
+            $('.item-add span').remove();
+            if($('.imgdiv img').length==3){
+                $('.filediv').remove();
+            }
+     /*       //获取图片dom
+            var img = document.getElementById("preview");
+            //图片路径设置为读取的图片
+            img.src =e.target.result ;*/
+        };
+        reader.readAsDataURL(file);
+      }
+ 
+</script>
+</html>

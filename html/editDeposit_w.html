@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>爱丽屋</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <link rel="stylesheet" type="text/css" href="../css/reset.css">
+	<link rel="stylesheet" type="text/css" href="../css/main.css">
+    <script type="text/javascript" src="../js/jquery-3.1.1.min.js"></script>
+	<script type="text/javascript" src="../js/main.js"></script>
+	<script type="text/javascript" src="../js/sty.js"></script>
+</head>
+<body>
+    <div class="card-list">
+        <h4 class="title">定金编辑</h4>
+        <div class="second-head">
+            <div class="input-list3 input-list3-left input-queren">
+                <label for="">手机号码</label>
+                <a>确认</a>
+                <input type="text">
+            </div>
+            <div class="input-list3">
+                <label for="">业主姓名</label>
+                <input type="text">
+            </div>
+            <div class="input-list3 input-list3-100">
+                <label for="">房源地址</label>
+                <input type="text">
+            </div>
+            <div class="input-list3 input-list3-left">
+                <label for="">租金价格</label>
+                <input type="text">
+            </div>
+            <div class="input-list3">
+                <label for="">定金金额</label>
+                <input type="text">
+            </div>
+            <div class="input-list3 input-date">
+                <label for="">租期</label>
+                <input type="date"><span class="text-zhi">至</span><input type="date">
+            </div>
+        </div>
+        <button class="btn-large2 primary-btn">发送</button>
+    </div>
+</body>
+<script type="text/javascript">
+
+    $(document).ready(function(){
+         $('.btn-maybe').on('click',function(){
+            $('.second-head').removeClass('hide');
+         })
+    })
+
+</script>
+</html>

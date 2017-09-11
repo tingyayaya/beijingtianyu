@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>爱丽屋</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <link rel="stylesheet" type="text/css" href="../css/reset.css">
+	<link rel="stylesheet" type="text/css" href="../css/main.css">
+    <script type="text/javascript" src="../js/jquery-3.1.1.min.js"></script>
+	<script type="text/javascript" src="../js/main.js"></script>
+	<script type="text/javascript" src="../js/sty.js"></script>
+</head>
+<body>
+<div class="container padding-40">
+    <h4 class="title">绑定身份证</h4>
+    <div class="input-list">
+        <label for="inputname">姓名</label>
+        <input id="inputname" type="text">
+    </div>
+    <div class="input-list">
+        <label for="idcode">身份证</label>
+        <input type="number"  id="idcode">
+        <span class="warning-text marginTop errorp"></span>
+    </div>
+    <button class="btn-large primary-btn" style="margin-top:0.1rem">完成</button>
+</div>
+<div class="footer-info">
+        <span>投诉电话：</span>
+        <a href="#">400-1245511</a>
+    </div>
+</body>
+<script type="text/javascript">
+
+    $(document).ready(function(){
+
+        function checkidid(){
+           var code = $('#idcode').val();
+           var reg18 = /^[1-9]\d{5}[1-9]\d{3}((0[1-9])|(1[0-2]))((0[1-9])|([1-2]\d)|(3[0|1]))\d{4}$/;
+           if(!reg18.test(code)){
+              $('.warning-text').html('审核未通过');
+              return false
+           }else{
+                return true;
+           }
+        }
+
+        function checkname(){
+           var name = $('#inputname').val();
+           if(name.length==0){
+            sty.Toast('姓名不能为空');
+            return false;
+           }else{
+            return true;
+           }
+           
+        }
+
+        $('.primary-btn').on('click',function(){
+           var flag =  checkidid()&&checkname();
+           if(flag){
+             sty.Toast('认证成功');
+           }
+        })
+      
+    })
+
+</script>
+</html>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>爱丽屋</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+	<link rel="stylesheet" type="text/css" href="../css/reset.css">
+	<link rel="stylesheet" type="text/css" href="../css/main.css">
+	<script type="text/javascript" src="../js/jquery-3.1.1.min.js"></script>
+	<script type="text/javascript" src="../js/main.js"></script>
+    <script type="text/javascript" src="../js/sty.js"></script>
+	<script type="text/javascript" src="../js/city.js"></script>
+</head>
+<body>
+	<div class="header-box">
+		<div class="search-bar">
+			<input type="text"  class="search-box" placeholder="搜上班区域/乘坐的地铁线">
+			<div class="pull-right city-item">
+				<span class="select-city" id="gr_zone_ids" data-id="330100">杭州</span>
+				<img src="../imgs/down.png" alt="" class="icon-down-solid">
+			</div>
+		</div>
+		<div class="select-bar">
+	        <ul>
+	            <li class="trad-area">商圈</li>
+	            <li class="metro">地铁线</li>
+	        </ul>
+	    </div>
+	</div>
+    <div class="select-bar-hide trad-area-item" style="display:none">
+    	<ul>
+            <li >商圈</li>
+            <li >商圈</li>
+            <li >商圈</li>
+            <li >商圈</li>
+            <li >商圈</li>
+            <li >商圈</li>
+            <li >商圈</li>
+        </ul>
+    </div>
+    <div class="select-bar-hide metro-item" style="display:none">
+    	<ul>
+            <li >地铁线</li>
+            <li >地铁线</li>
+            <li >地铁线</li>
+            <li >地铁线</li>
+            <li >地铁线</li>
+            <li >地铁线</li>
+        </ul>
+    </div>
+    <div class="margin-top158">
+    	<ul class="house-item">
+    		<li>
+    			<img src="../imgs/house1.jpg" alt="">
+    			<span class="house-title">申花 滨江紫金府 主卧 朝东 B室</span>
+    			<span class="house-traffic auxiliary-text small-text">地铁 1号线</span>
+    			<span class="house-price warning-text">3000元/月</span>
+    		</li>
+    		<li>
+    			<img src="../imgs/house2.jpg" alt="">
+    			<span class="house-title">申花 滨江紫金府 主卧 朝东 B室</span>
+    			<span class="house-traffic auxiliary-text small-text">地铁 1号线</span>
+    			<span class="house-price warning-text">5000元/月</span>
+    		</li>
+    		<li>
+    			<img src="../imgs/house1.jpg" alt="">
+    			<span class="house-title">申花 滨江紫金府 主卧 朝东 B室</span>
+    			<span class="house-traffic auxiliary-text small-text">地铁 1号线</span>
+    			<span class="house-price warning-text">6000元/月</span>
+    		</li>
+    		<li>
+    			<img src="../imgs/house1.jpg" alt="">
+    			<span class="house-title">申花 滨江紫金府 主卧 朝东 B室</span>
+    			<span class="house-traffic auxiliary-text small-text">地铁 1号线</span>
+    			<span class="house-price warning-text">3000元/月</span>
+    		</li>
+    		<li>
+    			<img src="../imgs/house2.jpg" alt="">
+    			<span class="house-title">申花 滨江紫金府 主卧 朝东 B室</span>
+    			<span class="house-traffic auxiliary-text small-text">地铁 1号线</span>
+    			<span class="house-price warning-text">5000元/月</span>
+    		</li>
+    		<li>
+    			<img src="../imgs/house1.jpg" alt="">
+    			<span class="house-title">申花 滨江紫金府 主卧 朝东 B室</span>
+    			<span class="house-traffic auxiliary-text small-text">地铁 1号线</span>
+    			<span class="house-price warning-text">6000元/月</span>
+    		</li>
+    		<li>
+    			<img src="../imgs/house2.jpg" alt="">
+    			<span class="house-title">申花 滨江紫金府 主卧 朝东 B室</span>
+    			<span class="house-traffic auxiliary-text small-text">地铁 1号线</span>
+    			<span class="house-price warning-text">5000元/月</span>
+    		</li>
+    		<li>
+    			<img src="../imgs/house1.jpg" alt="">
+    			<span class="house-title">申花 滨江紫金府 主卧 朝东 B室</span>
+    			<span class="house-traffic auxiliary-text small-text">地铁 1号线</span>
+    			<span class="house-price warning-text">6000元/月</span>
+    		</li>
+    	</ul>
+    </div>
+  
+</body>
+<script type="text/javascript">
+    city.getcity();
+    $(document).on('click',$('.house-item li'),function(){
+         window.location.href = "houseDetail.html";
+    })
+</script>
+</html>

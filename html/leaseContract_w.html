@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>爱丽屋</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <link rel="stylesheet" type="text/css" href="../css/reset.css">
+	<link rel="stylesheet" type="text/css" href="../css/main.css">
+    <script type="text/javascript" src="../js/jquery-3.1.1.min.js"></script>
+	<script type="text/javascript" src="../js/main.js"></script>
+	<script type="text/javascript" src="../js/sty.js"></script>
+</head>
+<body>
+    <div class="card-list">
+        <h4 class="title">租赁合同编辑</h4>
+        <div class="first-head">
+            <div class="input-list3 input-date">
+                <label for="">租期<span class="small-text">(根据日期计算年限，不满一年的计算几月几日)</span></label>
+                <input type="date"><span class="text-zhi">至</span><input type="date">
+            </div>
+            <div class="input-list3">
+                <label for="">租金总额</label>
+                <input type="text">
+            </div>
+            <div class="pull-left" style="width:3rem;">
+                <a class="btn-maybe" href="#second">确认</a>
+            </div>
+        </div>
+        <div class="second-head hide">
+            <div class="input-list3 input-date">
+                <label for="">第一年（整年）</label>
+                <input type="date"><span class="text-zhi">至</span><input type="date">
+            </div>
+            <div class="input-list3 input-list3-left">
+                <label for="">租金</label>
+                <input type="text">
+            </div>
+            <div class="input-list3">
+                <label for="">支付方式</label>
+                <select name="payment">
+                    <option value="">月付</option>
+                    <option value="">两月付</option>
+                    <option value="">季付付</option>
+                    <option value="">半付</option>
+                    <option value="">整年付</option>
+                </select>
+            </div>
+            <div class="input-list3 input-list3-left">
+                <label for="">提前付款天数</label>
+                <input type="text">
+            </div>
+        </div>
+        <div class="second-head hide">
+            <div class="input-list3 input-date">
+                <label for="">第二年（整年）</label>
+                <input type="date"><span class="text-zhi">至</span><input type="date">
+            </div>
+            <div class="input-list3 input-list3-left">
+                <label for="">租金</label>
+                <input type="text">
+            </div>
+            <div class="input-list3">
+                <label for="">支付方式</label>
+                <select name="payment">
+                    <option value="">月付</option>
+                    <option value="">两月付</option>
+                    <option value="">季付付</option>
+                    <option value="">半付</option>
+                    <option value="">整年付</option>
+                </select>
+            </div>
+            <div class="input-list3 input-list3-left">
+                <label for="">提前付款天数</label>
+                <input type="text">
+            </div>
+        </div>
+        <div class="second-head hide">
+            <div class="input-list3 input-date">
+                <label for="">第三年（3个月05天）</label>
+                <input type="date"><span class="text-zhi">至</span><input type="date">
+            </div>
+            <div class="input-list3 input-list3-left">
+                <label for="">租金</label>
+                <input type="text">
+            </div>
+            <div class="input-list3">
+                <label for="">支付方式</label>
+                <select name="payment">
+                    <option value="">月付</option>
+                    <option value="">两月付</option>
+                    <option value="">季付付</option>
+                    <option value="">半付</option>
+                    <option value="">整年付</option>
+                </select>
+            </div>
+            <div class="input-list3 input-list3-left">
+                <label for="">提前付款天数</label>
+                <input type="text">
+            </div>
+        </div>
+        <div class="second-head hide">
+            <div class="input-list3 input-list3-left input-queren">
+                <label for="">业主电话</label>
+                <a>确认</a>
+                <input type="text">
+            </div>
+            <div class="input-list3">
+                <label for="">业主姓名</label>
+                <input type="text">
+            </div>
+            <div class="input-list3 input-list3-left">
+                <label for="">电表底数</label>
+                <input type="text">
+            </div>
+            <div class="input-list3">
+                <label for="">冷水表底数</label>
+                <input type="text">
+            </div>
+            <div class="input-list3 input-list3-left">
+                <label for="">中水表底数</label>
+                <input type="text">
+            </div>
+             <div class="input-list3">
+                <label for="">燃气表底数</label>
+                <input type="text">
+            </div>
+        </div>
+        <div class="second-head hide">
+            <div class="input-list3 input-list3-left">
+                <label for="">水费</label>
+                <input type="text">
+            </div>
+            <div class="input-list3">
+                <label for="">电费</label>
+                <input type="text">
+            </div>
+            <div class="input-list3 input-list3-left">
+                <label for="">燃气费</label>
+                <input type="text">
+            </div>
+            <div class="input-list3">
+                <label for="">网费</label>
+                <input type="text">
+            </div>
+            <div class="input-list3 input-list3-left">
+                <label for="">物业费</label>
+                <input type="text">
+            </div>
+            <div class="input-list3">
+                <label for="">取暖费</label>
+                <input type="text">
+            </div>
+            <div class="input-list3 input-list3-left">
+                <label for="">电视费</label>
+                <input type="text">
+            </div>
+            <div class="input-list3">
+                <label for="">卫生费</label>
+                <input type="text">
+            </div>
+            <div class="input-list3 input-list3-left">
+                <label for="">其他</label>
+                <input type="text">
+            </div>
+            <div class="input-list3 ">
+                <label for="">押金</label>
+                <input type="text">
+            </div>
+        </div>
+        <div class="second-head hide">
+            <div class="input-list3 ">
+                <label for="">其他约定</label>
+                <textarea name="other"></textarea>
+            </div>
+        </div>
+        <div class="second-head hide">
+            <div class="input-list3">
+                <label for="">房屋交割清单</label>
+                <table>
+                    <tr>
+                        <th>物品</th>
+                        <th>数量</th>
+                        <th>物品</th>
+                        <th>数量</th>
+                    </tr>
+                    <tr>
+                        <td>床(张)</td>
+                        <td><input type="number"></td>
+                        <td>衣柜(个)</td>
+                        <td><input type="number"></td>
+                    </tr>
+                    <tr>
+                        <td>写字台(个)</td>
+                        <td><input type="number"></td>
+                        <td>餐桌(张)</td>
+                        <td><input type="number"></td>
+                    </tr>
+                    <tr>
+                        <td>椅子(把)</td>
+                        <td><input type="number"></td>
+                        <td>茶几(张)</td>
+                        <td><input type="number"></td>
+                    </tr>
+                    <tr>
+                        <td>电视柜(个)</td>
+                        <td><input type="number"></td>
+                        <td>电视(台)</td>
+                        <td><input type="number"></td>
+                    </tr>
+                    <tr>
+                        <td>冰箱(台)</td>
+                        <td><input type="number"></td>
+                        <td>洗衣机(台)</td>
+                        <td><input type="number"></td>
+                    </tr>
+                    <tr>
+                        <td>空调(台)</td>
+                        <td><input type="number"></td>
+                        <td>电卡(张)</td>
+                        <td><input type="number"></td>
+                    </tr>
+                    <tr>
+                        <td>水卡(张)</td>
+                        <td><input type="number"></td>
+                        <td>钥匙(把)</td>
+                        <td><input type="number"></td>
+                    </tr>
+                    <tr>
+                        <td>门禁(个)</td>
+                        <td><input type="number"></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <button class="btn-large2 primary-btn hide">确认</button>
+    </div>
+</body>
+<script type="text/javascript">
+
+    $(document).ready(function(){
+         $('.btn-maybe').on('click',function(){
+            $('.second-head').removeClass('hide');
+            $('.btn-queren').removeClass('hide');
+         })
+         if(sty.GetUrlHash()){
+            $('.second-head').removeClass('hide');
+            $('.btn-queren').removeClass('hide');
+         }
+    })
+
+</script>
+</html>

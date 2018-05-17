@@ -5,64 +5,86 @@
 	<title>爱丽屋</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <link rel="stylesheet" type="text/css" href="../css/reset.css">
-	<link rel="stylesheet" type="text/css" href="../css/main.css">
-    <script type="text/javascript" src="../js/jquery-3.1.1.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/main.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 	<script type="text/javascript" src="../js/main.js"></script>
 	<script type="text/javascript" src="../js/sty.js"></script>
 </head>
 <body>
-<ul class="tab-lower-line-3">
-    <li class="tab-active">未签约</li>
-    <li>已签约</li>
-    <li>已作废</li>
-</ul>
-<div class="tab-list tab-mingxi">
-    <ul>
-        <span>租赁</span>
-        <li>
-            <span class="tab-list-name">金泰丽富3楼5单元1604</span>
-            <span class="small-text tab-list-second">2017-06</span>
-            <i class="card-icon icon-right"></i>
-        </li>
-        <li>
-            <span class="tab-list-name">金泰丽富3楼5单元1604</span>
-            <span class="small-text tab-list-second">2017-06</span>
-            <i class="card-icon icon-right"></i>
-        </li>
-    </ul>
-    <ul>
-        <span>代理</span>
-        <li>
-            <span class="tab-list-name">金泰丽富3楼5单元1604</span>
-            <span class="small-text tab-list-second">2017-06</span>
-            <i class="card-icon icon-right"></i>
-        </li>
-        <li>
-            <span class="tab-list-name">金泰丽富3楼5单元1604</span>
-            <span class="small-text tab-list-second">2017-06</span>
-            <i class="card-icon icon-right"></i>
-        </li>
-    </ul>
-    <ul>
-        <span>居间</span>
-        <li>
-            <span class="tab-list-name">金泰丽富3楼5单元1604</span>
-            <span class="small-text tab-list-second">2017-06</span>
-            <i class="card-icon icon-right"></i>
-        </li>
-    
-    </ul>
-</div>
+    <div id="app">
+        <ul class="tab-lower-line-3">
+            <li :class="index == num ? 'tab-active' : ''" v-for="(item, index) in tab" @click="changeTab(index)">{{item}}</li>
+        </ul>
+        <div class="tab-list tab-mingxi">
+            <ul>
+                <span>租赁</span>
+                <li>
+                    <span class="tab-list-name">金泰丽富3楼5单元1604</span>
+                    <span class="small-text tab-list-second">2017-06</span>
+                    <i class="card-icon icon-right"></i>
+                </li>
+                <li>
+                    <span class="tab-list-name">金泰丽富3楼5单元1604</span>
+                    <span class="small-text tab-list-second">2017-06</span>
+                    <i class="card-icon icon-right"></i>
+                </li>
+            </ul>
+            <ul>
+                <span>代理</span>
+                <li>
+                    <span class="tab-list-name">金泰丽富3楼5单元1604</span>
+                    <span class="small-text tab-list-second">2017-06</span>
+                    <i class="card-icon icon-right"></i>
+                </li>
+                <li>
+                    <span class="tab-list-name">金泰丽富3楼5单元1604</span>
+                    <span class="small-text tab-list-second">2017-06</span>
+                    <i class="card-icon icon-right"></i>
+                </li>
+            </ul>
+            <ul>
+                <span>居间</span>
+                <li>
+                    <span class="tab-list-name">金泰丽富3楼5单元1604</span>
+                    <span class="small-text tab-list-second">2017-06</span>
+                    <i class="card-icon icon-right"></i>
+                </li>
+            
+            </ul>
+        </div>
+    </div>
 </body>
-<script type="text/javascript" src="../js/aui-tab.js" ></script>
 <script type="text/javascript">
-    var tab = new auiTab({
-        element: $('.tab-lower-line-3')[0], //document.getElementById("footer")
-        index:1,
-        repeatClick:false
-    },function(ret){
-        console.log(ret);
-    });
-
+   var app = new Vue({
+       el: '#app',
+       data: function(){
+           return {
+              tab:['未签约', '已签约', '已作废'],
+              num: 0
+           }
+       },
+       created: function(){
+         this.getContract()
+       },
+       methods: {
+          changeTab: function(index){
+             this.num = index
+          },
+          getContract: function(){
+              axios({
+                  type: 'get',
+                  url: baseURL + 'My_contract.jsp',
+                  responseType: 'text/json;charset=UTF-8',
+                  params: {
+                    openid: sessionStorage.openId
+                  }
+              })
+              .then(function(res){
+                  console.log(res);
+              })
+          }
+       }
+   })
 </script>
 </html>

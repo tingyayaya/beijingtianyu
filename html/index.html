@@ -6,29 +6,35 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 	<link rel="stylesheet" type="text/css" href="../css/reset.css">
 	<link rel="stylesheet" type="text/css" href="../css/main.css">
-	<script type="text/javascript" src="../js/jquery-3.1.1.min.js"></script>
-	<script type="text/javascript" src="../js/main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script type="text/javascript" src="../js/jquery-3.1.1.min.js"></script>
+    <script type="text/javascript" src="../js/main.js"></script>
+	<script type="text/javascript" src="../js/wxlicense2.js"></script>
     <script type="text/javascript" src="../js/sty.js"></script>
-	<script type="text/javascript" src="../js/city.js"></script>
+    <script type="text/javascript" src="../js/index.js"></script>
+    <script type="text/javascript" src="../js/city.js"></script>
+    <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
 </head>
 <body>
+<div id="app">
 	<div class="header-box">
 		<div class="search-bar">
-			<input type="text"  class="search-box" placeholder="搜上班区域/乘坐的地铁线">
-			<div class="pull-right city-item">
-				<span class="select-city" id="gr_zone_ids" data-id="330100">杭州</span>
+			<input type="search"  class="search-box" placeholder="搜上班区域/乘坐的地铁线">
+			<div class="pull-right city-item" id="gr_zone_ids_show" >
+				<span class="select-city" data-id="330100" id="mycity">杭州</span>
 				<img src="../imgs/down.png" alt="" class="icon-down-solid">
 			</div>
 		</div>
 		<div class="select-bar">
 	        <ul>
-	            <li class="trad-area">商圈</li>
-	            <li class="metro">地铁线</li>
+	            <li class="trad-area"  @click="toggle1">商圈</li>
+	            <li class="metro"  @click="toggle2">地铁线</li>
 	        </ul>
 	    </div>
 	</div>
-    <div class="select-bar-hide trad-area-item" style="display:none">
-    	<ul>
+    <div class="select-bar-hide trad-area-item" >
+    	<ul v-show="isShow1">
             <li >商圈</li>
             <li >商圈</li>
             <li >商圈</li>
@@ -38,8 +44,8 @@
             <li >商圈</li>
         </ul>
     </div>
-    <div class="select-bar-hide metro-item" style="display:none">
-    	<ul>
+    <div class="select-bar-hide metro-item" >
+    	<ul v-show="isShow2">
             <li >地铁线</li>
             <li >地铁线</li>
             <li >地铁线</li>
@@ -48,64 +54,64 @@
             <li >地铁线</li>
         </ul>
     </div>
-    <div class="margin-top158">
-    	<ul class="house-item">
-    		<li>
-    			<img src="../imgs/house1.jpg" alt="">
-    			<span class="house-title">申花 滨江紫金府 主卧 朝东 B室</span>
-    			<span class="house-traffic auxiliary-text small-text">地铁 1号线</span>
-    			<span class="house-price warning-text">3000元/月</span>
-    		</li>
-    		<li>
-    			<img src="../imgs/house2.jpg" alt="">
-    			<span class="house-title">申花 滨江紫金府 主卧 朝东 B室</span>
-    			<span class="house-traffic auxiliary-text small-text">地铁 1号线</span>
-    			<span class="house-price warning-text">5000元/月</span>
-    		</li>
-    		<li>
-    			<img src="../imgs/house1.jpg" alt="">
-    			<span class="house-title">申花 滨江紫金府 主卧 朝东 B室</span>
-    			<span class="house-traffic auxiliary-text small-text">地铁 1号线</span>
-    			<span class="house-price warning-text">6000元/月</span>
-    		</li>
-    		<li>
-    			<img src="../imgs/house1.jpg" alt="">
-    			<span class="house-title">申花 滨江紫金府 主卧 朝东 B室</span>
-    			<span class="house-traffic auxiliary-text small-text">地铁 1号线</span>
-    			<span class="house-price warning-text">3000元/月</span>
-    		</li>
-    		<li>
-    			<img src="../imgs/house2.jpg" alt="">
-    			<span class="house-title">申花 滨江紫金府 主卧 朝东 B室</span>
-    			<span class="house-traffic auxiliary-text small-text">地铁 1号线</span>
-    			<span class="house-price warning-text">5000元/月</span>
-    		</li>
-    		<li>
-    			<img src="../imgs/house1.jpg" alt="">
-    			<span class="house-title">申花 滨江紫金府 主卧 朝东 B室</span>
-    			<span class="house-traffic auxiliary-text small-text">地铁 1号线</span>
-    			<span class="house-price warning-text">6000元/月</span>
-    		</li>
-    		<li>
-    			<img src="../imgs/house2.jpg" alt="">
-    			<span class="house-title">申花 滨江紫金府 主卧 朝东 B室</span>
-    			<span class="house-traffic auxiliary-text small-text">地铁 1号线</span>
-    			<span class="house-price warning-text">5000元/月</span>
-    		</li>
-    		<li>
-    			<img src="../imgs/house1.jpg" alt="">
-    			<span class="house-title">申花 滨江紫金府 主卧 朝东 B室</span>
-    			<span class="house-traffic auxiliary-text small-text">地铁 1号线</span>
-    			<span class="house-price warning-text">6000元/月</span>
-    		</li>
-    	</ul>
+    <div class="margin-top158" >
+    	<ul class="house-item" id="Housing-list">
+            <li v-for="item in items">
+                <img :src="item['skt18.skf178'] = ' ' ? errorImg : item['skt18.skf178'] " >
+                <span class="house-title">{{item["SKT23.SKF270"]}}{{item["skt18.skf2438"]}}{{item["skt18.skf2294"]}}{{item["skt18.skf170"]}}</span>
+                <span class="house-traffic auxiliary-text small-text">{{item["skt23.skf2437"]}}</span>
+                <span class="house-price warning-text">{{item["skt18.skf174"]}}元/月</span>
+            </li>
+        </ul>
     </div>
-  
+</div>
 </body>
+
 <script type="text/javascript">
-    city.getcity();
-    $(document).on('click',$('.house-item li'),function(){
-         window.location.href = "houseDetail.html";
+    
+    var app = new Vue({
+       el: '#app',
+       data: function() {
+           return {
+             items : [],
+             errorImg: '../imgs/imgDefault.png',
+             isShow1 : false,
+             isShow2 : false
+           }
+       },
+       created : function(){
+          this. getItems();
+       },
+       computed: {
+       },
+       methods: {
+           toggle1: function(){
+              this.isShow2 = false;
+              this.isShow1 = !this.isShow1;
+           },
+           toggle2: function(){
+              this.isShow1 = false;
+              this.isShow2 = !this.isShow2;
+           },
+           getItems: function(){
+                var self = this;
+                axios({
+                   method: 'get',
+                   url: baseURL + 'House_query_copy.jsp'
+                })
+                .then(function(res){
+                  for (var i=0; i< res.data.data.length; i++){
+                    self.items.push(res.data.data[i]);
+                  }
+                })
+                .catch(function(err){
+                    console.log(err)
+                })
+            }
+       }
     })
+
+    city.getcity();
 </script>
+
 </html>

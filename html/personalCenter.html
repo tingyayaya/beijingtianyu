@@ -2,47 +2,118 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>在线预约</title>
+	<title>个人中心</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <link rel="stylesheet" type="text/css" href="../css/reset.css">
 	<link rel="stylesheet" type="text/css" href="../css/main.css">
-    <script type="text/javascript" src="../js/jquery-3.1.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script type="text/javascript" src="../js/sty.js"></script>
 	<script type="text/javascript" src="../js/main.js"></script>
-	<script type="text/javascript" src="../js/sty.js"></script>
+	<script type="text/javascript" src="../js/wxlicense.js"></script>
+    <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
 </head>
+
 <body>
-    <div class="card-list border-bottom1 personal-head">
-       <img src="../imgs/header.png" alt="默认头像" class="header-icon">
-       <h4 class="person-name">SJON</h4>
-       <span class="tip-block small-text">未认证</span>
-    </div>
-    <div class="card-bottom ziliao-box" onclick="window.location.href='personalInfo.html'">
-        <i class="icon-person icon-geren"></i>
-        <span class="ziliao">个人资料</span>
-    </div>
-    <ul class="person-list">
-        <li onclick="window.location.href='rentPay.html'">
-            <i class="icon-person icon-jiaofei"></i><span>房租缴费</span>
-        </li>
-        <li onclick="window.location.href='myContract.html'">
-            <i class="icon-person icon-hetong"></i><span>合同管理</span>
-        </li>
-        <li onclick="window.location.href='addFee.html'">
-            <i class="icon-person icon-fare"></i><span>添加费用</span>
-        </li>
-        <li onclick="window.location.href='myDeposit.html'">
-            <i class="icon-person icon-dingjin"></i><span>我的定金</span>
-        </li>
-    </ul>
-    <div class="footer-info">
-        <span>客服电话：</span>
-        <a href="#">400-1245511</a>
+    <div id="per-center">
+        <div class="card-list border-bottom1 personal-head">
+            <img :src="perInfo.defaultImg" alt="默认头像" class="header-icon">
+            <h4 class="person-name">{{perInfo.nickname}}</h4>
+            <span class="tip-block small-text bindSign">{{changeAuthentication}}</span>
+        </div>
+        <div class="card-bottom ziliao-box" @click = "toLink">
+            <i class="icon-person icon-geren"></i>
+            <span class="ziliao">个人资料</span>
+        </div>
+        <ul class="person-list">
+            <li onclick="window.location.href='rentPay.html'">
+                <i class="icon-person icon-jiaofei"></i><span>房租缴费</span>
+            </li>
+            <li onclick="window.location.href='myContract.html'">
+                <i class="icon-person icon-hetong"></i><span>合同管理</span>
+            </li>
+            <li onclick="window.location.href='addFee.html'">
+                <i class="icon-person icon-fare"></i><span>添加费用</span>
+            </li>
+            <li onclick="window.location.href='myDeposit.html'">
+                <i class="icon-person icon-dingjin"></i><span>我的定金</span>
+            </li>
+        </ul>
+        <div class="footer-info">
+            <span>客服电话：</span>
+            <a href="#">400-1245511</a>
+        </div>
     </div>
 </body>
 <script type="text/javascript">
-
-    $(document).ready(function(){
-       
+ 
+    var perCenter = new Vue({
+        el: '#per-center',
+        data: function() {
+            return {
+              perInfo:{
+                    defaultImg: '../imgs/header.png',
+                    nickname: '诸葛亮',
+                    userimg: '',
+                    authentication: ''
+              }
+            }
+        },
+        created: function() {
+            //默认超过绑定用户
+            this.bindOpenid();
+            //获取
+            this.getPerInfo()
+        },
+        computed: {
+            changeAuthentication : function() {
+                //console.log(this.perInfo.authentication)
+                return this.perInfo.authentication == true ? "已认证" : "未认证"
+            }
+        },
+        methods: {
+            toLink: function(){
+                
+                if(this.perInfo.authentication){
+                    window.location.href='personalInfo.html'
+                }else{
+                    window.location.href='authenticIdentity.html'
+                }
+            },
+            bindOpenid : function() {
+                var self = this;
+                axios({
+                   method: 'get',
+                   url: baseURL + 'Bound_customers_copy_copy.jsp',
+                   responseType: 'text/json;charset=UTF-8',
+                   params: {
+                       openid: sessionStorage.openId
+                   }
+                })
+                .then(function(res){
+                  //默认绑定
+                  // console.log(res)  
+                })
+            },
+            getPerInfo : function() {
+                var self = this;
+                axios({
+                    methods: 'get',
+                    url: baseURL + 'Foun_kh_copy.jsp',
+                    responseType: 'text/json:charset=UTF-8',
+                    params: {
+                        Openid: sessionStorage.openId
+                    }
+                })
+                .then(function(res){
+                    if(res.data.data.length !== 0){
+                        self.perInfo.authentication = true;
+                    }else{
+                        self.perInfo.authentication = false;
+                    }
+                })
+            }
+        }
     })
 
 </script>

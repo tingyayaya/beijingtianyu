@@ -470,18 +470,29 @@
                       </div>';
         $('body').append(content); 
 
-        $('body').on('click', '#gr_zone_ids', function () {
+        $('body').on('click', '#gr_zone_ids_show', function () {
           var zid = $(this).attr('id');
           $('.containcity').show();
-          $('.select-bar-hide').slideUp();
+         /* $('.select-bar-hide').slideUp();*/
+          $(this).attr('id','gr_zone_ids_hide');
+        })
+
+        $('body').on('click', '#gr_zone_ids_hide', function () {
+          var zid = $(this).attr('id');
+          $('.containcity').hide();
+          $(this).attr('id','gr_zone_ids_show');
         })
 
         //选择城市 start
         $('body').on('click', '.city-list p', function () {
+            var  city = $(this).html();
+            var cityStim = city.replace(/\s+/g, "");
+            $('#mycity').html(cityStim);
             var type = $('.containcity').data('type');
             $('#zone_ids').html($(this).html()).attr('data-id', $(this).attr('data-id'));
             $('#gr_zone_ids').html($(this).html()).attr('data-id', $(this).attr('data-id'));
             $('.containcity').hide();
+            $('#gr_zone_ids_hide').attr('id','gr_zone_ids_show');
         });
         $('body').on('click', '.letter a', function () {
             var s = $(this).html();

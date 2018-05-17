@@ -12,23 +12,27 @@
 </head>
 <body>
 <div class="container padding-40">
-    <h4 class="title">绑定手机号</h4>
+    <h4 class="title">请填写身份证和手机号</h4>
     <div class="input-list">
-        <label for="name">账号</label>
-        <input id="name" type="text" value="Admin">
+        <label for="cardid">身份证</label>
+        <input id="cardid">
     </div>
-    <div class="input-list">   
-        <label for="code">密码</label>
-        <input type="password"  id="password" value="Admin">
+    <div class="input-list">
+        <label for="phone">手机号码</label>
+        <input id="phone">
     </div>
-    <button class="btn-large primary-btn btn-yes" style="margin-top:0.1rem">下一步</button>
+  <!--   <div class="input-list">
+        <label for="code">验证码</label>
+        <input type="number"  id="inputCode">
+        <button type="button" class="disable-btn2 btn-small btn-getcode">获取验证码</button>
+    </div> -->
+    <button class="btn-large primary-btn btn-yes" style="margin-top:0.1rem">提交</button>
 </div>
 </body>
 <script type="text/javascript">
 
-     $(document).ready(function(){
+    $(document).ready(function(){
 
-   
        function checkphone(){
            var phoneNum = $('#phone').val();
            var myreg = /^(((13[0-9]{1})|(14[0-9]{1})|(17[0]{1})|(15[0-3]{1})|(15[5-9]{1})|(18[0-9]{1}))+\d{8})$/;
@@ -42,6 +46,16 @@
             }else if(myreg.test(phoneNum)){
                 return true;
             }
+       }
+
+       function checkid(){
+        var cardid = $('#cardid').val();
+        var reg = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
+          if(!reg.test(cardid)){
+            return false;
+          }else{
+            return true;
+          }
        }
        
        $('#phone').on('input',function(){
@@ -93,31 +107,37 @@
         }
        
        $(document).on('click','.btn-yes',function(){
-    
-         getToken();
-       })
+        var flag = checkphone()&&checkid();
+         console.log(flag);
+         if(flag){
 
-       function getToken(){
-
-           var mydata = {
-            'account':$('#name').val(),
-            'password':$('#password').val()
-           }
-           //mydata = JSON.stringify(mydata);
-           $.ajax({
+            var mydata = {
+              'SKT129.SKF1895':$('#cardid').val(),
+              'SKT129.SKF1896':$('#phone').val(),
+              'SKT129.SKF2436':sessionStorage.openId,
+              'token':sessionStorage.token
+            }
+            console.log(mydata);
+            $.ajax({
               type:'post',
-              url:'http://vip5.chenksoft.com:8080/ckapi/api/56/token.jsp',
+              url:'http://182.92.188.214:8080/ckapi/api/8/Bangding_kh.jsp',
               data:mydata,
-              success:function(data){
-                //console.log(data);
-                if(data.code==0){
-                  sessionStorage.token = data.data;
-                  sty.Toast('登录成功');
-                  location.href = 'index.html';
-                }
-              }
-           })
-       }
+                  success:function(data){
+                      console.log(data);
+                      if(data.code==0){
+                           sessionStorage.bindID = 1;
+                           sty.Toast('绑定成功');
+                            var t= setTimeout(function(){
+                              window.location.href='personalCenter.html';
+                            },1000);
+                      }else{
+                          sty.Toast('该用户不存在');
+                      }
+                   }
+              })
+            
+          }
+       })
        
     })
 

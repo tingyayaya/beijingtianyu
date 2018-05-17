@@ -1,3 +1,4 @@
+
 html{
 	font-size: 625%;
 }
@@ -54,6 +55,7 @@ input::-ms-placeholder{
 	border-radius: 0.1rem;
 	padding: 0.2rem;
 	height: 2rem;
+	font-size: 0.14rem;
 }
 .radiusbox li label{
 	color: #bbb;
@@ -183,11 +185,13 @@ input::-ms-placeholder{
 }
 .select-city{
 	margin-right:0.05rem;
-	width: 0.45rem;
+	width: 0.7rem;
 	display: inline-block;
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
+	text-align: right;
+	padding-right:0.1rem; 
 }
 .select-bar {
 	width: 3.2rem;
@@ -569,7 +573,7 @@ input::-ms-placeholder{
 	margin-right: 0.22rem;
 }
 .input-list label{
-    margin: 0.025rem auto;
+    margin: 0.1rem auto;
     width: 2.8rem;
     font-size: 0.12rem;
 }
@@ -599,7 +603,8 @@ input::-ms-placeholder{
     width: 2.6rem;
     height: 0.36rem;
     background-color: #f8f8f8;
-    padding: 0 0.1rem;
+	padding: 0 0.1rem;
+	font-size: 0.14rem;
 }
 .input-list textarea{
     display: block;
@@ -661,27 +666,31 @@ input::-ms-placeholder{
 /*个人中心*/
 .personal-head{
 	height: 0.60rem;
+	background: #fff url(../imgs/header-bg.png) no-repeat;
+	background-size: 6.4rem 0.8rem;
 }
 .header-icon{
 	width: 0.6rem;
 	height: 0.6rem;
 	float: left;
 	margin-right: 0.15rem;
+	border-radius: 0.3rem;
 }
 .tip-block{
-	width: 0.4rem;
-	height: 0.18rem;
 	border-radius: 0.03rem;
-	background-color: #f33682;
+	background-color: #fff779;
 	display: block;
-	color: #fff;
+	color: #000;
 	float: left;
 	text-align: center;
+    padding: 0.005rem 0.05rem;
 }
 .person-name{
 	float: left;
 	width: 2.1rem;
 	margin-top: 0.1rem;
+	font-size: 0.15rem;
+	color:#fff;
 }
 .person-list li{
 	line-height: 0.2rem;
@@ -1132,4 +1141,19 @@ input[type=checkbox]:checked:after{
     text-align: center;
     line-height: 0.4rem;
     top:3.6rem;
+}
+.error{
+	color: red
+}
+#toast{
+	padding: 0.1rem 0.2rem;
+	background: rgba(0, 0, 0, 0.8);
+	color: #fff;
+	font-size: 1.4rem;
+	text-align: center;
+}
+.info-identity{
+	text-align: center;
+	padding: 0.2rem 0;
+	color: #32afff;
 }

@@ -1,3 +1,4 @@
+//字体
 (function (doc, win) {
       var docEl = doc.documentElement,
         resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
@@ -14,32 +15,40 @@
       doc.addEventListener('DOMContentLoaded', recalc, false);
 })(document, window);
 
-$(document).ready(function(){
 
-  $('.select-bar ul li').click(function(){
+//vue-axios
+var baseURL = 'http://tydcxt.com:8080/ckapi/api/8/'
 
-      var index_ = $(this).index();
+sessionStorage.openId = 'ojNqat4-n8y3qlfvjBw-VUEnj6pM'
+
+
+window.onload= function(){
   
-      if($('.select-bar-hide').eq(index_).hasClass('select-show')){
-          $('.select-bar-hide').eq(index_).slideUp();
-          $('.select-bar-hide').eq(index_).removeClass('select-show');
+ 
+  // $('.select-bar ul li').click(function(){
 
-      }else{
-        $('.select-bar-hide').slideUp();
-        $('.select-bar-hide').eq(index_).slideDown();
-        $('.select-bar-hide').removeClass('select-show');
-        $('.select-bar-hide').eq(index_).addClass('select-show');
-      }
+  //     var index_ = $(this).index();
+  
+  //     if($('.select-bar-hide').eq(index_).hasClass('select-show')){
+  //         $('.select-bar-hide').eq(index_).slideUp();
+  //         $('.select-bar-hide').eq(index_).removeClass('select-show');
+
+  //     }else{
+  //       $('.select-bar-hide').slideUp();
+  //       $('.select-bar-hide').eq(index_).slideDown();
+  //       $('.select-bar-hide').removeClass('select-show');
+  //       $('.select-bar-hide').eq(index_).addClass('select-show');
+  //     }
       
-      if($('.select-bar-hide').hasClass('select-show')){
-        $('body').css({'height':'100%','overflow':'hidden'});
-      }else{
-        $('body').css({'height':'','overflow':''});
-      }
-  })
+  //     if($('.select-bar-hide').hasClass('select-show')){
+  //       $('body').css({'height':'100%','overflow':'hidden'});
+  //     }else{
+  //       $('body').css({'height':'','overflow':''});
+  //     }
+  // })
   
-  $('.select-bar-hide ul li').click(function(){
-     $('.select-bar-hide').slideUp();
-  })
+  // $('.select-bar-hide ul li').click(function(){
+  //    $('.select-bar-hide').slideUp();
+  // })
 
-})
+}

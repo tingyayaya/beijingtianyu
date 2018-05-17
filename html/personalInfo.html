@@ -5,37 +5,70 @@
 	<title>爱丽屋</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <link rel="stylesheet" type="text/css" href="../css/reset.css">
-	<link rel="stylesheet" type="text/css" href="../css/main.css">
-    <script type="text/javascript" src="../js/jquery-3.1.1.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/main.css">
+    <link rel="stylesheet" type="text/css" href="../css/iconfont.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 	<script type="text/javascript" src="../js/main.js"></script>
 	<script type="text/javascript" src="../js/sty.js"></script>
+    <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
 </head>
 <body class="grey-bg">
-    <div class="padding-40 info-contain" >
-        <ul class="radiusbox">
+    <div class="padding-40 info-contain" id="app">
+        <ul class="radiusbox" id="userInfo" v-for="item in info">
             <li>
                 <label for="name">姓名</label>
-                <span>朱敏敏</span>
+                <span>{{item['skt129.skf1894']}}</span>
             </li>
             <li>
                 <label for="code">身份证</label>
-                <span>3304841566412544</span>
+                <span>{{item['skt129.skf1895']}}</span>
             </li>
             <li>
                 <label for="phone">手机号</label>
-                <span>1874784364487</span>
+                <span>{{item['skt129.skf1896']}}</span>
             </li>
+            <div class="info-identity">
+                <i class="icon iconfont icon-wancheng"></i>身份认证完成
+            </div>
         </ul>
-        <div class="btn-changephone" onclick="window.location.href='changePhone.html'">
+        
+        <!-- <div class="btn-changephone" onclick="window.location.href='changePhone.html'">
             <p>修改手机</p>
             <i class="icon-down-down"></i>
-        </div>
+        </div> -->
     </div>
 </body>
 <script type="text/javascript">
-
-    $(document).ready(function(){
-       
+     
+    var app = new Vue({
+        el: '#app',
+        data: function(){
+            return {
+              info : []
+            }
+        },
+        created:function(){
+           this.getInfo();
+        },
+        methods: {
+          getInfo: function(){
+              var self = this;
+              axios({
+                  type: 'get',
+                  url: baseURL + 'Foun_kh_copy.jsp',
+                  responseType: 'text/json; charest=UTF-8',
+                  params: {
+                      Openid : sessionStorage.openId
+                  }
+              })
+              .then(function(res){
+                console.log(res.data.data)
+                 self.info = res.data.data
+                 console.log(self.info)
+              })
+          }
+        }
     })
 
 </script>

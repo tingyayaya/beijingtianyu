@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>身份认证</title>
+    <link rel="stylesheet" type="text/css" href="../css/reset.css">
+    <link rel="stylesheet" type="text/css" href="../css/main.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/vee-validate@latest"></script>
+    <script type="text/javascript" src="../js/main.js"></script>
+    <script type="text/javascript" src="../js/sty.js"></script>
+    <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+</head>
+<body>
+    <div class="container padding-40" id="app">
+        <h4 class="title">您还未认证，请先绑定身份证哦</h4>
+        <div class="input-list">
+            <label for="name">手机号</label>
+            <input type="tel" v-model="info.tel" v-on:input ="checkTel">
+            <span class="error">{{errorTip.tip1}}</span>
+        </div>
+        <div class="input-list">
+            <label for="code">身份证</label>
+            <input type="text" v-model="info.idCard" v-on:input ="checkIdCard">
+            <span class="error">{{errorTip.tip2}}</span>
+        </div>
+        <button class="btn-large primary-btn btn-yes" style="margin-top:0.1rem" @click = "bindId">绑定</button>
+    </div>
+</body>
+<script src="../js/toast.js"></script>
+<script src="../js/layer.js"></script>
+<script>
+    var app = new Vue({
+        el: '#app',
+        data: function(){
+            return {
+                info: {
+                    tel: '',
+                    idCard: '',
+                    openid: ''   //skt129.skf2436
+                },
+                errorTip:{
+                    tip1 : '',
+                    tips: '',
+                }
+            }
+        },
+        methods: {
+            bindId: function(){
+               
+                var flag = this.checkTel()&this.checkIdCard()
+                var self = this;
+                
+                if(flag){
+                    axios({
+                        type: 'get',
+                        url: baseURL + 'Bind_Operation_copy.jsp',
+                        responseType: 'text/json;charset=UTF-8',
+                        params: {
+                            'skt129.skf2436' : sessionStorage.openId,
+                            'skt129.skf1896' : self.info.tel,
+                            'skt129.skf1895' : self.info.idCard
+                        }
+                    })
+                    .then(function(res){
+                        if(res.data.code == 0){
+                            layer.open({
+                                content: '认证成功，将返回个人中心',
+                                btn: '我知道了',
+                                shadeClose: true,
+                                yes: function(){
+                                    window.location.href = "personalCenter.html"
+                                }
+                            });
+                        }
+                    })
+                }
+                
+            },
+            checkTel: function() {
+                var flag = toast.checkPhone(this.info.tel)
+                if(flag === true){
+                    this.errorTip.tip1 = '';
+                    return true;
+                }else{
+                    this.errorTip.tip1 = "请输入正确的手机号";
+                    return false;
+                }
+            },
+            checkIdCard: function() {
+                var flag = toast.checkIdCard(this.info.idCard)
+                if(flag === true){
+                    this.errorTip.tip2 = '';
+                    return true;
+                }else{
+                    this.errorTip.tip2 = "请输入正确的身份证";
+                    return false;
+                }
+            }
+        }
+    })
+</script>
+</html>

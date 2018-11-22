@@ -4,117 +4,121 @@
 	<meta charset="UTF-8">
 	<title>个人中心</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <link rel="stylesheet" type="text/css" href="../css/reset.css">
-	<link rel="stylesheet" type="text/css" href="../css/main.css">
-    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script type="text/javascript" src="../js/sty.js"></script>
+  <link rel="stylesheet" type="text/css" href="../css/weui.css">
+  <link rel="stylesheet" type="text/css" href="../css/iconfont/iconfont.css">
+  <link rel="stylesheet" type="text/css" href="../css/reset.css">
+  <link rel="stylesheet" type="text/css" href="../css/main.css">
+  <script type="text/javascript" src="../js/jquery-3.1.1.min.js"></script>
+  <script type="text/javascript" src="../js/weui.js"></script>
+  <script type="text/javascript" src="../js/sty.js"></script>
 	<script type="text/javascript" src="../js/main.js"></script>
 	<script type="text/javascript" src="../js/wxlicense.js"></script>
-    <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+  <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
 </head>
 
 <body>
     <div id="per-center">
         <div class="card-list border-bottom1 personal-head">
-            <img :src="perInfo.defaultImg" alt="默认头像" class="header-icon">
-            <h4 class="person-name">{{perInfo.nickname}}</h4>
-            <span class="tip-block small-text bindSign">{{changeAuthentication}}</span>
+            <img alt="默认头像" class="header-icon" id="userimg" src="../imgs/header.png">
+            <h4 class="person-name" id="nickname"></h4>
+            <span class="tip-block small-text bindSign" id="bindInfo"></span>
         </div>
-        <div class="card-bottom ziliao-box" @click = "toLink">
+        <div class="card-bottom ziliao-box" id="myinfo">
             <i class="icon-person icon-geren"></i>
             <span class="ziliao">个人资料</span>
         </div>
         <ul class="person-list">
-            <li onclick="window.location.href='rentPay.html'">
-                <i class="icon-person icon-jiaofei"></i><span>房租缴费</span>
+            <li onclick="window.location.href='myrent.html'">
+                <i class="icon-person icon-dingjin"></i><span>房租缴费</span>
             </li>
             <li onclick="window.location.href='myContract.html'">
                 <i class="icon-person icon-hetong"></i><span>合同管理</span>
             </li>
-            <li onclick="window.location.href='addFee.html'">
+            <!-- <li onclick="window.location.href='addFee.html'">
                 <i class="icon-person icon-fare"></i><span>添加费用</span>
-            </li>
-            <li onclick="window.location.href='myDeposit.html'">
+            </li> -->
+            <!-- <li onclick="window.location.href='myDeposit.html'">
                 <i class="icon-person icon-dingjin"></i><span>我的定金</span>
-            </li>
+            </li> -->
         </ul>
-        <div class="footer-info">
+        <!-- <div class="footer-info">
             <span>客服电话：</span>
             <a href="#">400-1245511</a>
-        </div>
+        </div> -->
+    </div>
+    <div class="weui-tabbar">
+        <a href="index.html" class="weui-tabbar__item">
+            <i class="iconfont icon-home"></i>
+            <p class="weui-tabbar__label">首页</p>
+        </a>
+        <a href="onlineOrder.html" class="weui-tabbar__item">
+          <i class="iconfont icon-contact"></i>
+          <p class="weui-tabbar__label">预约</p>
+        </a>
+        <a href="personalCenter.html" class="weui-tabbar__item">
+            <i class="iconfont icon-mine-full"></i>
+            <p class="weui-tabbar__label icon-active">我</p>
+        </a>
     </div>
 </body>
 <script type="text/javascript">
- 
-    var perCenter = new Vue({
-        el: '#per-center',
-        data: function() {
-            return {
-              perInfo:{
-                    defaultImg: '../imgs/header.png',
-                    nickname: '诸葛亮',
-                    userimg: '',
-                    authentication: ''
-              }
-            }
+$(document).ready(function(){
+  weui.searchBar('#searchBar');
+    //sessionStorage.openId = 'ojNqat4-n8y3qlfvjBw-VUEnj6pM'
+    
+    if(sty.GetQueryString('openid')){
+      sessionStorage.openId = sty.GetQueryString('openid');
+      var nickname = sty.GetQueryString('nickname')
+      sessionStorage.nickname = nickname;
+      sessionStorage.userimg = sty.GetQueryString('userimg');
+     // alert(sessionStorage.openId)
+    }
+    window.location.href = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx50e81fa4e8b451bd&redirect_uri=http%3a%2f%2ftydcxt.com%2fgongzh.php&response_type=code&scope=snsapi_userinfo&state=url#wechat_redirect';
+    return;
+    //获取openID
+    if(!sessionStorage.openId){
+       window.location.href = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx50e81fa4e8b451bd&redirect_uri=http%3a%2f%2ftydcxt.com%2fgongzh.php&response_type=code&scope=snsapi_userinfo&state=url#wechat_redirect';
+       
+    }else{
+      // alert(sessionStorage.openId)
+      // alert(sessionStorage.nickname)
+      // alert(sessionStorage.userimg)
+      $('#userimg').attr('src', sessionStorage.userimg)
+      $('#nickname').html(sessionStorage.nickname)
+      
+      //获取客户信息 用于查询客户是否绑定了openid
+      $.ajax({
+        type: 'post',
+        url: sty.baseUrl + '/Bound_customers.jsp',
+        data: {
+            openid: sessionStorage.openId
         },
-        created: function() {
-            //默认超过绑定用户
-            this.bindOpenid();
-            //获取
-            this.getPerInfo()
-        },
-        computed: {
-            changeAuthentication : function() {
-                //console.log(this.perInfo.authentication)
-                return this.perInfo.authentication == true ? "已认证" : "未认证"
-            }
-        },
-        methods: {
-            toLink: function(){
-                
-                if(this.perInfo.authentication){
-                    window.location.href='personalInfo.html'
-                }else{
-                    window.location.href='authenticIdentity.html'
-                }
-            },
-            bindOpenid : function() {
-                var self = this;
-                axios({
-                   method: 'get',
-                   url: baseURL + 'Bound_customers_copy_copy.jsp',
-                   responseType: 'text/json;charset=UTF-8',
-                   params: {
-                       openid: sessionStorage.openId
-                   }
-                })
-                .then(function(res){
-                  //默认绑定
-                  // console.log(res)  
-                })
-            },
-            getPerInfo : function() {
-                var self = this;
-                axios({
-                    methods: 'get',
-                    url: baseURL + 'Foun_kh_copy.jsp',
-                    responseType: 'text/json:charset=UTF-8',
-                    params: {
-                        Openid: sessionStorage.openId
-                    }
-                })
-                .then(function(res){
-                    if(res.data.data.length !== 0){
-                        self.perInfo.authentication = true;
-                    }else{
-                        self.perInfo.authentication = false;
-                    }
-                })
-            }
+        success: function(data){
+
+         if(data.data.length==0){   //没有绑定用户
+          $('#bindInfo').html('未绑定会员,点击绑定')
+
+          $('#myinfo').on('click', function(){
+            window.location.href = 'bindPhone.html'
+          })
+          $('#bindInfo').on('click', function(){
+            window.location.href = 'bindPhone.html'
+          })
+         }else{    //已绑定
+          $('#bindInfo').html('已绑定会员')
+
+          $('#myinfo').on('click', function(){
+            window.location.href = 'personalInfo.html'
+          })
+          
+         }
         }
-    })
+      })
+    }
+    
+})
+
+
 
 </script>
 </html>

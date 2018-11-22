@@ -1,5 +1,6 @@
 window.onload = function(){
   
+
   var code = sty.GetQueryString("code");
 
   if(code){
@@ -26,5 +27,5 @@ window.onload = function(){
         });
   }
   
-
+  
 }

@@ -5,14 +5,16 @@
     }; 
 
     window.sty = {
-      
+      payurl: 'http://vip5.chenksoft.com:8080/ckpay/',
+      baseUrl: 'http://hzpan2015.oicp.net:88/ckapi/api/3/',
       /*获取的url参数*/ 
       GetQueryString : function (name) {  
-            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");  
-            var r = window.location.search.substr(1).match(reg);  
-            if (r != null)  
-                return unescape(r[2]);  
-            return null;  
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");  
+        var search = decodeURI(window.location.search);
+        var r = search.substr(1).match(reg);  
+        if (r != null)  
+            return unescape(r[2]);  
+        return null;  
       },
       GetUrlHash : function (){
             return location.hash;
@@ -40,19 +42,7 @@
           default :
               return true;
           }
-      },
-      Toast : function(content){
-          var content2= ' <div class="toast-in">'+content+'</div>';
-          $('body').append(content2);
-
-          $('.toast-in').css({
-            'left':($(window).width() - $(".toast-in").innerWidth())/2
-          });
-
-          var t = setTimeout(function(){
-                  $('.toast-in').remove();
-          },2000);
-      },
+      }
     }
 })();
 

@@ -4,36 +4,53 @@
 	<meta charset="UTF-8">
 	<title>爱丽屋</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-	<link rel="stylesheet" type="text/css" href="../css/reset.css">
+  <link rel="stylesheet" type="text/css" href="../css/weui.css">
+  <link rel="stylesheet" type="text/css" href="../css/reset.css">
 	<link rel="stylesheet" type="text/css" href="../css/main.css">
-    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script type="text/javascript" src="../js/jquery-3.1.1.min.js"></script>
-    <script type="text/javascript" src="../js/main.js"></script>
+	<link rel="stylesheet" type="text/css" href="../css/iconfont/iconfont.css">
+  <script type="text/javascript" src="../js/jquery-3.1.1.min.js"></script>
+  <script type="text/javascript" src="../js/weui.js"></script>
+  <script type="text/javascript" src="../js/main.js"></script>
 	<script type="text/javascript" src="../js/wxlicense2.js"></script>
-    <script type="text/javascript" src="../js/sty.js"></script>
-    <script type="text/javascript" src="../js/index.js"></script>
-    <script type="text/javascript" src="../js/city.js"></script>
-    <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+  <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
 </head>
 <body>
-<div id="app">
+<div id="app" >
 	<div class="header-box">
 		<div class="search-bar">
-			<input type="search"  class="search-box" placeholder="搜上班区域/乘坐的地铁线">
-			<div class="pull-right city-item" id="gr_zone_ids_show" >
-				<span class="select-city" data-id="330100" id="mycity">杭州</span>
-				<img src="../imgs/down.png" alt="" class="icon-down-solid">
-			</div>
-		</div>
-		<div class="select-bar">
+        <div class="weui-search-bar" id="searchBar">
+            <form class="weui-search-bar__form" action="#" > 
+                <div class="weui-search-bar__box">
+                    <i class="weui-icon-search"></i>
+                    <input type="search" class="weui-search-bar__input" id="search-box" placeholder="搜区域/地铁线" required="" autocomplete="off" onkeyup="search()">
+                    <a href="javascript:" class="weui-icon-clear"></a>
+                </div>
+                <label class="weui-search-bar__label">
+                    <i class="weui-icon-search"></i>
+                    <span>搜索</span>
+                </label>
+            </form>
+            <a href="javascript:" class="weui-search-bar__cancel-btn">取消</a>
+            <div class="pull-right city-item" id="gr_zone_ids_show" >
+                <span class="select-city" data-id="330100" id="mycity" onclick="pickerCity()"></span>
+                <img src="../imgs/down.png" alt="" class="icon-down-solid">
+              </div>
+        </div>
+        
+			<!-- <input type="search"  class="search-box" id="search-box" placeholder="搜区域/地铁线" onkeyup="search()"> -->
+			
+    </div>
+  </div>
+        <!-- 之前的商圈和地铁线调整去掉 -->
+		<!-- <div class="select-bar">
 	        <ul>
 	            <li class="trad-area"  @click="toggle1">商圈</li>
 	            <li class="metro"  @click="toggle2">地铁线</li>
 	        </ul>
-	    </div>
-	</div>
-    <div class="select-bar-hide trad-area-item" >
+	    </div> -->
+  
+    <!-- 之前的商圈列表去掉 -->
+    <!-- <div class="select-bar-hide trad-area-item" >
     	<ul v-show="isShow1">
             <li >商圈</li>
             <li >商圈</li>
@@ -43,8 +60,9 @@
             <li >商圈</li>
             <li >商圈</li>
         </ul>
-    </div>
-    <div class="select-bar-hide metro-item" >
+    </div> -->
+    <!-- 之前的地铁线列表去掉 -->
+    <!-- <div class="select-bar-hide metro-item" >
     	<ul v-show="isShow2">
             <li >地铁线</li>
             <li >地铁线</li>
@@ -53,65 +71,149 @@
             <li >地铁线</li>
             <li >地铁线</li>
         </ul>
+    </div> -->
+
+    <!-- 房源列表-->
+    <div class="margin-top88" >
+        <div class="weui-grids">
+            <a href="index.html" class="weui-grid">
+                <div class="weui-grid__icon">
+                    <img src="../imgs/quan.png" alt="" class="icon-down-quan">
+                </div>
+                <p class="weui-grid__label">热门城市</p>
+            </a>
+            <a href="onlineOrder.html" class="weui-grid">
+                <div class="weui-grid__icon">
+                    <img src="../imgs/yuyue.png" alt="">
+                </div>
+                <p class="weui-grid__label">在线预约</p>
+            </a>
+            <a href="sale.html" class="weui-grid">
+                <div class="weui-grid__icon">
+                    <img src="../imgs/youhui.png" alt="">
+                </div>
+                <p class="weui-grid__label">其他优惠</p>
+            </a>
+        </div>
+    	  <ul class="house-item" id="Housing-list"></ul>
+        <div class="sky-empty hide" id="sky-empty">
+          <i class="sky-bg-empty-list sky-bg"></i>
+          <p class="sky-font">没有符合条件的列表</p>
+        </div>
     </div>
-    <div class="margin-top158" >
-    	<ul class="house-item" id="Housing-list">
-            <li v-for="item in items">
-                <img :src="item['skt18.skf178'] = ' ' ? errorImg : item['skt18.skf178'] " >
-                <span class="house-title">{{item["SKT23.SKF270"]}}{{item["skt18.skf2438"]}}{{item["skt18.skf2294"]}}{{item["skt18.skf170"]}}</span>
-                <span class="house-traffic auxiliary-text small-text">{{item["skt23.skf2437"]}}</span>
-                <span class="house-price warning-text">{{item["skt18.skf174"]}}元/月</span>
-            </li>
-        </ul>
-    </div>
+    <div class="weui-tabbar">
+      <a href="index.html" class="weui-tabbar__item">
+          <i class="iconfont icon-home-full"></i>
+          <p class="weui-tabbar__label icon-active">首页</p>
+      </a>
+      <a href="onlineOrder.html" class="weui-tabbar__item">
+        <i class="iconfont icon-contact"></i>
+        <p class="weui-tabbar__label">预约</p>
+      </a>
+      <a href="personalCenter.html" class="weui-tabbar__item">
+          <i class="iconfont icon-mine"></i>
+          <p class="weui-tabbar__label">我</p>
+      </a>
+  </div>
 </div>
 </body>
 
+<script type="text/javascript" src="../js/index.js"></script>
+<script type="text/javascript" src="../js/sty.js"></script>
 <script type="text/javascript">
     
-    var app = new Vue({
-       el: '#app',
-       data: function() {
-           return {
-             items : [],
-             errorImg: '../imgs/imgDefault.png',
-             isShow1 : false,
-             isShow2 : false
-           }
-       },
-       created : function(){
-          this. getItems();
-       },
-       computed: {
-       },
-       methods: {
-           toggle1: function(){
-              this.isShow2 = false;
-              this.isShow1 = !this.isShow1;
-           },
-           toggle2: function(){
-              this.isShow1 = false;
-              this.isShow2 = !this.isShow2;
-           },
-           getItems: function(){
-                var self = this;
-                axios({
-                   method: 'get',
-                   url: baseURL + 'House_query_copy.jsp'
-                })
-                .then(function(res){
-                  for (var i=0; i< res.data.data.length; i++){
-                    self.items.push(res.data.data[i]);
-                  }
-                })
-                .catch(function(err){
-                    console.log(err)
-                })
-            }
-       }
-    })
 
-    city.getcity();
+    $(function(){
+      $.ajax({
+        url: sty.baseUrl + '/m2_cslb.jsp',
+        type: 'post',
+        data: '',
+        success: function(data){
+          $('#mycity').html(data.data[0]['skf59']);
+          getHouseList()
+        }
+      })
+      
+    })
+    weui.searchBar('#searchBar');
+    
+    // 城市列表
+    function pickerCity(){
+      
+      $.ajax({
+        url: sty.baseUrl + '/m2_cslb.jsp',
+        type: 'post',
+        data: '',
+        success: function(data){
+          //console.log(data)
+          var mydata = data.data.map(function(item, index){
+            return { label: item['skf59'], value: index }
+          })
+          weui.picker(mydata,{
+            className: 'picker-city',
+            onConfirm: function(result){
+              $('#mycity').html(result[0].label);
+              getHouseList();
+            }
+          })
+        }
+      })
+    }
+    
+    
+    //获取房源
+    function getHouseList(){
+      var searchVal = $('#search-box').val();
+      var cityVal = $('#mycity').html();
+      
+      var mydata = {
+        v_v1: cityVal,
+        v_v2: searchVal,
+        v_v3: searchVal
+      }
+      $.ajax({
+        url: sty.baseUrl + '/m2_fycx.jsp',
+        type: 'post',
+        data: mydata,
+        success: function(data){
+          if(data.data.length==0){
+            $('#sky-empty').removeClass('hide');
+          }
+          $('#Housing-list').empty();
+          var content = '';
+          data.data.forEach(function(item){
+            content += '<li data-id='+ item['skf153'] +' onclick="jumpToDedail(this)">\
+                          <img src='+ item['skf33685876'] +'>\
+                          <span class="house-title">'+ item['skf267'] +'</span>\
+                          <span class="house-traffic auxiliary-text small-text">朝向:'+ item['skf170'] +'&nbsp;&nbsp;地铁:'+ item['skf33685874'] +'&nbsp;&nbsp;商圈:'+ item['pq'] +'</span>\
+                          <span class="house-price  small-text">付款周期: '+ item['skf169']+ '</span>\
+                          <span class="house-price main-text-color">'+ item['skf174'] +'元/月</span>\
+                        </li>'
+          })
+          
+          $('#Housing-list').append(content)
+        }
+      })
+    }
+    
+    
+    
+    //搜索keycode enter
+    function search(e){
+      var e = e||event;
+      var keywd = e.target.value;
+      if(e.keyCode == 13 && keywd){
+        getHouseList();
+        document.activeElement.blur();
+        e.preventDefault();
+      }
+    }
+
+    //跳转到详情页
+    function jumpToDedail(id){
+      var id = $(id).attr('data-id');
+      window.location.href = 'houseDetail.html?id='+id;
+    }
 </script>
 
 </html>

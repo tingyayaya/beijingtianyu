@@ -7,6 +7,88 @@ body{
 	color: #222;
 	background-color: #fff;
 }
+.weui-grids:before{
+  border: 0;
+}
+.weui-grids{
+  border-bottom: 1px solid #efefef;
+}
+.weui-grid:before{
+  border-right: none;
+  border-top: none;
+}
+.weui-grid::after{
+  border-bottom: none;
+  border-left: none;
+}
+.weui-grid__icon{
+  width: 0.5rem;
+  height: 0.5rem;
+}
+.weui-cell_link{
+  color: #2CC9BA;
+}
+/* 
+ * 
+ */
+.sky-bg{
+  display: inline-block;
+  background: url(../imgs/backgroundimg.png);
+  background-size: 3rem 4rem;
+}
+.sky-bg-empty-list{
+  width: 1.5rem;
+  height: 0.94rem;
+}
+.sky-empty{
+  margin: 1rem auto;
+  text-align: center;
+}
+.sky-font{
+  color: #2CC9BA;
+  font-size: 0.12rem;
+}
+.weui-cells{
+  font-size: 0.13rem;
+}
+.btn-class{
+  text-align: right;
+  padding-top: 0.05rem;
+}
+
+.weui-btn_warn{
+  background: #2CC9BA;
+}
+.weui-btn_warn:not(.weui-btn_disabled):active{
+  color:rgba(255, 255, 255, 0.6);
+  background-color:#2CC9BA;
+}
+.a-block{
+  height: 100%;
+  width: 100%;
+  display: inline-block;
+  line-height: 2.8;
+  color: #fff;
+}
+.page__ft {
+  padding: 0.2rem;
+  
+}
+.page__ft p{
+  color: #ccc;
+  text-align: center;
+}
+.page-header{
+  padding: 0.2rem 0.4rem;
+  font-size: 0.15rem;
+}
+.page-header h3{
+  font-weight: normal;
+}
+.page-header p{
+  font-size: 0.12rem;
+  color: #888
+}
 .auxiliary-text{   /*辅助性文字*/
 	color: #bbb;
 }
@@ -14,12 +96,25 @@ body{
 	color: #666;
 }
 .small-text{
-	font-size: 0.12rem;
+	font-size: 0.13rem;
     -webkit-transform-origin-x: 0;
     -webkit-transform: scale(0.90);
 }
+#sty-price{
+  font-size: 0.15rem;
+  margin-right: 0.05rem;
+}
 .warning-text{
-	color:#f33682;
+	color:#E64340;
+}
+.icon-home-full, .icon-mine-full,.icon-contact-full,.icon-active{
+  color: #2CC9BA
+}
+.main-text-color{
+	color:#2CC9BA;
+}
+.weui-tabbar{
+  position: fixed;
 }
 .weight-text{
 	font-weight: 600;
@@ -42,15 +137,19 @@ input::-ms-placeholder{
 .marginTop{
 	margin-top: -0.2rem;
 }
+.margin-top88{
+  margin-top: 0.44rem;
+  margin-bottom: 0.53rem;
+}
 .marginLeft{
 	margin-left: 0.1rem;
 }
 .grey-bg{
-	background-color: #f2f2f2;
+	background-color: #f8f8f8;
 }
 .radiusbox{
 	width: 2.4rem;
-	border:1px solid #e2e2e2;
+	border:1px solid #efefef;
 	background-color: #fff;
 	border-radius: 0.1rem;
 	padding: 0.2rem;
@@ -70,7 +169,10 @@ input::-ms-placeholder{
 .info-contain{
 	position: relative;
 }
-.
+.iconfont{
+  line-height: 1.2;
+  font-size: 22px !important;
+}
 /*轮播*/
 
 .swiper-container {
@@ -154,11 +256,11 @@ input::-ms-placeholder{
 
 .search-bar{
 	width: 3.2rem;
-	height: 0.44rem;
-	border-bottom: 1px solid #e2e2e2;
+	/* height: 0.44rem; */
+	/* border-bottom: 1px solid #efefef; */
 }
 .search-box{
-	width: 2rem;
+	width: 2.3rem;
 	height: 0.3rem;
 	border-radius: 0.15rem;
 	background-color: #eee;
@@ -170,9 +272,8 @@ input::-ms-placeholder{
 }
 
 .city-item{
-	line-height: 0.44rem;
-	padding-right: 0.1rem;
-	height: 0.44rem;
+  padding-right: 0.1rem;
+  width: 0.5rem;
 	cursor: pointer;
 	position: relative;
 }
@@ -180,18 +281,22 @@ input::-ms-placeholder{
 	width: 0.075rem;
 	height: 0.0475rem;
 	position: absolute;
-    top: 0.2rem;
-    right: 0.1rem;
+    top: 0.08rem;
+    right: 0.08rem;
+}
+.icon-down-quan{
+  width: 0.5rem !important;
+	height: 0.5rem !important;
 }
 .select-city{
 	margin-right:0.05rem;
-	width: 0.7rem;
+	width: 0.4rem;
 	display: inline-block;
 	overflow: hidden;
-	text-overflow: ellipsis;
 	white-space: nowrap;
 	text-align: right;
-	padding-right:0.1rem; 
+  padding-right:0.1rem; 
+  vertical-align: middle;
 }
 .select-bar {
 	width: 3.2rem;
@@ -247,7 +352,7 @@ input::-ms-placeholder{
 .house-item li{
 	width: 3rem;
 	height: 0.64rem;
-	border-bottom: 1px solid #e2e2e2;
+	border-bottom: 1px solid #f8f8f8;
 	padding: 0.1rem;
 	cursor: pointer;
 }
@@ -286,7 +391,7 @@ input::-ms-placeholder{
 	padding: 0.1rem;
 }
 .border-bottom1{
-	border-bottom: 1px solid #e2e2e2;
+	border-bottom: 1px solid #efefef;
 }
 .card-title{
 	font-size: 0.14rem;
@@ -300,26 +405,24 @@ input::-ms-placeholder{
 .card-third span{
 	display: inline-block;
 	padding: 0 0.05rem;
-	height:0.2rem;
 	font-size: 0.1rem; 
 	background: #ebebeb;
 	border-radius: 0.1rem;
 }
 .card-third a{
-	color: #0b97ef;
+	color: #2CC9BA;
 	width: 0.6rem;
-	height: 0.2rem;
 	text-align: center;
 }
 .prepay-mode{
 	display: inline-block;
 	margin-left: 0.5rem;
-	border: 1px solid #0b97ef;
+	border: 1px solid #2CC9BA;
 }
 .prepay-money{
 	display: inline-block;
 	float: right;
-	border:1px solid #0b97ef;
+	border:1px solid #2CC9BA;
 }
 .card-bottom{
 	padding: 0.1rem;
@@ -391,10 +494,11 @@ input::-ms-placeholder{
 .icon-right{
 	width: 0.08rem;
 	height: 0.15rem;
-	background-position: 0 -0.28rem;
+  background-position: 0 -0.21rem;
+  background-size: 0.6rem 0.6rem; 
 	position: absolute;
-	top:0.25rem;
-	right: 0.1rem;
+  right: 0.1rem;
+  top: 0.05rem;
 }
 .icon-up{
 	width: 0.2rem; 
@@ -464,33 +568,40 @@ input::-ms-placeholder{
 	position:fixed;
 	bottom:0px;
 	left:0px;
-	border-top:1px solid #e2e2e2;
+	border-top:1px solid #efefef;
 	background-color: #fff;
 }
 .btn-toCall{
 	width:2.1rem;
 	height: 0.39rem;
-	background-color: #0b97ef;
+	background-color: #2CC9BA;
 	color:#fff;
 	font-size: 0.13rem;
 	float: left;
 }
 .btn-toCall:active,.btn-right:active{
 	padding: 0.01rem;
-	background-color: #42a7e6;
-
+	background-color: #1cab9d;
 }
 .btn-toSign{
 	width: 1.1rem;
 	height: 0.39rem;
 	background-color:#fff;
-	color:#0b97ef;
+	color:#2CC9BA;
 	font-size: 0.13rem;
 }
 .btn-right{
 	width: 1.1rem;
 	height: 0.39rem;
-	background-color:#4e94f5;
+	background-color:#2CC9BA;
+	color:#fff;
+  font-size: 0.13rem;
+  cursor: pointer;
+}
+.btn-disabled{
+  width: 1.1rem;
+	height: 0.39rem;
+	background-color:#c6c6c6;
 	color:#fff;
 	font-size: 0.13rem;
 }
@@ -523,13 +634,13 @@ input::-ms-placeholder{
 
 .input-list3 textarea{
 	width: 3rem;
-	border: 1px solid #e2e2e2;
+	border: 1px solid #efefef;
 	height: 0.75rem;
 	margin-top: 0.05rem; 
 }
 
 .input-list3>input{
-	border: 1px solid #e2e2e2;
+	border: 1px solid #efefef;
 	width: 1.17rem;
 	height: 0.36rem;
 	/*background-color: #f8f8f8;*/
@@ -539,7 +650,7 @@ input::-ms-placeholder{
 }
 .input-list3-100 input{
 	width: 2.8rem;
-	border: 1px solid #e2e2e2;
+	border: 1px solid #efefef;
 	height: 0.36rem;
 	padding: 0 0.1rem;
 	margin-top: 0.05rem;
@@ -551,7 +662,7 @@ input::-ms-placeholder{
 	color: #666;
 }
 .input-list3 table,td,th{
-	border:1px solid #e2e2e2;
+	border:1px solid #efefef;
 }
 .input-list3 table td{
 	padding:0 0.06rem;
@@ -584,7 +695,7 @@ input::-ms-placeholder{
 
 }
 .input-list3 select{
-	border: 1px solid #e2e2e2;
+	border: 1px solid #efefef;
 	width: 1.38rem;
 	height: 0.38rem;
 	background-color: #fff;
@@ -599,7 +710,7 @@ input::-ms-placeholder{
 	color: #bbb;
 }
 .input-list input{
-    border: 1px solid #e2e2e2;
+    border: 1px solid #efefef;
     width: 2.6rem;
     height: 0.36rem;
     background-color: #f8f8f8;
@@ -608,12 +719,13 @@ input::-ms-placeholder{
 }
 .input-list textarea{
     display: block;
-    border: 1px solid #e2e2e2;
+    border: 1px solid #efefef;
     margin: 0 auto 0.2rem;
     width: 2.6rem;
     background-color: #f8f8f8;
     height: 0.7rem;
-    padding: 0 0.1rem;
+    padding: 0.1rem 0.1rem;
+    font-size: 0.14rem;
 }
 .btn-large{
 	width: 2.8rem;
@@ -644,7 +756,7 @@ input::-ms-placeholder{
 	border-radius: 0.03rem;
 }
 .primary-btn{
-	background-color: #0b97ef;
+	background-color: #2CC9BA;
 	color:#fff;
 }
 .disable-btn{
@@ -667,7 +779,7 @@ input::-ms-placeholder{
 .personal-head{
 	height: 0.60rem;
 	background: #fff url(../imgs/header-bg.png) no-repeat;
-	background-size: 6.4rem 0.8rem;
+	background-size: auto 0.8rem;
 }
 .header-icon{
 	width: 0.6rem;
@@ -684,6 +796,7 @@ input::-ms-placeholder{
 	float: left;
 	text-align: center;
     padding: 0.005rem 0.05rem;
+    cursor: pointer;
 }
 .person-name{
 	float: left;
@@ -695,7 +808,7 @@ input::-ms-placeholder{
 .person-list li{
 	line-height: 0.2rem;
 	height: 0.3rem;
-	border-bottom: 1px solid #e2e2e2;
+	border-bottom: 1px solid #efefef;
 	padding: 0.1rem;
 	font-size: 0.14rem;
 	line-height: 0.3rem;
@@ -773,9 +886,14 @@ input::-ms-placeholder{
 	top: 0;
 	z-index: 99;
 }
+.tab-lower-line-3{
+  display: flex;
+  justify-content: center;
+  border-bottom: 1px solid #dedede;
+}
 .tab-lower-line-3 li{
-	width: 33.3%;
-	height: 0.34rem;
+  flex: 1;
+	height: 0.33rem;
 	text-align: center;
 	border-bottom: 3px solid #fff;
 	float: left;
@@ -792,27 +910,31 @@ input::-ms-placeholder{
 	font-size: 0.14rem;
 }
 .tab-active{
-	border-bottom: 3px solid #4e94f5 !important;
-	color: #4e94f5;
+	border-bottom: 3px solid #2CC9BA !important;
+	color: #2CC9BA;
 }
 .tab-mingxi ul>span,.tab-zhifu ul>span{
 	width: 3rem;
-	height: 0.15rem;
-	background-color: #ebebeb;
-	padding: 0.1rem;
-	display: block;
-
+	background-color: #f8f8f8;
+  display: block;
+  line-height: 3.5;
+  padding-left: 0.1rem; 
 }
 .tab-mingxi ul li{
 	width: 3rem;
-	height: 0.4rem;
-	border-bottom: 1px solid #e2e2e2;
+  border-bottom: 1px solid #efefef;
+  border-top: 1px solid #efefef;
 	padding: 0.1rem;
 	background-color: #fff;
 }
 .tab-list ul li{
    position: relative;
    cursor: pointer;
+   margin-top: 0.05rem;
+}
+.tab-list ul li .list-hd{
+  position: relative;
+  height: 0.3rem;
 }
 .tab-list ul li:active{
 	background-color: #f2f2f2;
@@ -827,9 +949,10 @@ input::-ms-placeholder{
 	color: #bbb;
 }
 .tab-mingxi ul li .tab-list-main{
-	float: right;
+  float: right;
+  font-weight: 400;
 	font-size: 0.15rem;
-	margin-top: -0.15rem;
+	margin-top: -0.1rem;
 }
 .tab-zhifu{
 	margin-bottom: 0.44rem;
@@ -839,17 +962,25 @@ input::-ms-placeholder{
 	height: 0.4rem;
 	background-color: #fff;
 	padding: 0.1rem 0.1rem 0.1rem 0.4rem;
-	position: relative;
+  position: relative;
+  margin-top: 0;
 }
-.tab-zhifu ul>li+li{
-	border-top: 8px solid #f2f2f2;
+.tab-zhifu ul li:active{
+	background-color: #fff;
 }
+
 .tab-zhifu ul li .tab-list-main{
-	font-size: 0.15rem;
+  font-size: 0.15rem;
+  font-weight: 400;
+  float: right;
+  margin-top: 0.1rem;
+  color: #2CC9BA;
 }
 .tab-zhifu ul li .tab-list-name{
 	width: 2.0rem;
-	display: inline-block;
+  display: inline-block;
+  font-size: 0.14rem;
+  
 }
 .tab-zhifu ul li .tab-list-second{
 	display: inline-block;
@@ -878,8 +1009,8 @@ input[type='radio']:after{
 input[type="checkbox"]:after{
   content: "";
   display:block;
-  width: 0.2rem;
-  height: 0.2rem;
+  width: 0.16rem;
+  height: 0.16rem;
   text-align: center;
   line-height: 14px;
   color: #fff;
@@ -891,12 +1022,12 @@ input[type="checkbox"]:after{
 input[type='radio']:checked:after{
   border: 0;
   background-color: #f2f2f2;
-  border: 6px solid #4e94f5;
+  border: 6px solid #2CC9BA;
 }
 input[type=checkbox]:checked:after{
   border: 0;
   background-color: #f2f2f2;
-  border: 6px solid #4e94f5;
+  border: 6px solid #2CC9BA;
 }
 .hetong{
 	position: absolute;
@@ -924,7 +1055,7 @@ input[type=checkbox]:checked:after{
 	width: 3rem;
 }
 .payment-list li{
-	border-bottom: 1px solid #e2e2e2;
+	border-bottom: 1px solid #efefef;
 	height: 0.44rem;
 	padding: 0.1rem 0;
 }
@@ -945,8 +1076,8 @@ input[type=checkbox]:checked:after{
 	color: #666;
 }
 .list-one{
-	border-bottom: 8px solid #e2e2e2;
-	border-top: 8px solid #e2e2e2;
+	border-bottom: 8px solid #efefef;
+	border-top: 8px solid #efefef;
 	height: 0.5rem;
 	line-height: 0.5rem;
 	padding: 0 0.1rem;
@@ -978,7 +1109,7 @@ input[type=checkbox]:checked:after{
 	height: 0.5rem;
 	line-height: 0.5rem;
 	padding: 0 0.1rem;
-	border-bottom: 1px solid #e2e2e2;
+	border-bottom: 1px solid #efefef;
 }
 .list-two li div{
 	float: right;
@@ -993,7 +1124,7 @@ input[type=checkbox]:checked:after{
 	padding: 0.1rem;
 }
 .itme-info textarea{
-	border: 1px solid #e2e2e2;
+	border: 1px solid #efefef;
 	width: 3rem;
 	height: 0.8rem;
 }
@@ -1007,7 +1138,7 @@ input[type=checkbox]:checked:after{
 .item-add .imgdiv img{
 	width: 0.8rem;
 	height: 0.8rem;
-	border: 1px solid #e2e2e2;
+	border: 1px solid #efefef;
 	margin: 0 0.1rem 0.1rem 0;
 }
 .item-add span{
@@ -1041,7 +1172,7 @@ input[type=checkbox]:checked:after{
 .filediv img{
 	width: 0.8rem;
 	height: 0.8rem;
-	border: 1px solid #e2e2e2;
+	border: 1px solid #efefef;
 	cursor: pointer;
 	vertical-align: bottom;
 	position: absolute;
@@ -1058,7 +1189,7 @@ input[type=checkbox]:checked:after{
 }
 .item-list li{
 	padding: 0.1rem;
-	border-bottom: 1px solid #e2e2e2;
+	border-bottom: 1px solid #efefef;
 }
 .item-list .item-name{
 	font-size: 0.14rem;
@@ -1098,7 +1229,7 @@ input[type=checkbox]:checked:after{
 	float: left;
 }
 .first-head .btn-maybe{
-	color: #0b97ef;
+	color: #2CC9BA;
 	float: right;
 	cursor: pointer;
 }
@@ -1109,7 +1240,7 @@ input[type=checkbox]:checked:after{
 	position: absolute;
 	right: 0;
 	top: 0;
-	color: #0b97ef;
+	color: #2CC9BA;
 }
 .errorp{
 	height: 0.18rem;
@@ -1155,5 +1286,5 @@ input[type=checkbox]:checked:after{
 .info-identity{
 	text-align: center;
 	padding: 0.2rem 0;
-	color: #32afff;
+	color: #2CC9BA;
 }

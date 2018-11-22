@@ -2,12 +2,12 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>爱丽屋</title>
+	<title>房源信息</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <link rel="stylesheet" type="text/css" href="../css/reset.css">
+  <link rel="stylesheet" type="text/css" href="../css/reset.css">
 	<link rel="stylesheet" type="text/css" href="../css/swiper.css">
 	<link rel="stylesheet" type="text/css" href="../css/main.css">
-    <script type="text/javascript" src="../js/jquery-3.1.1.min.js"></script>
+  <script type="text/javascript" src="../js/jquery-3.1.1.min.js"></script>
 	<script type="text/javascript" src="../js/swiper.min.js"></script>
 	<script type="text/javascript" src="../js/main.js"></script>
 	<script type="text/javascript" src="../js/sty.js"></script>
@@ -17,42 +17,38 @@
         <div class="swiper-wrapper index-top"></div>
     </div>
     <div class="card-list border-bottom1">
-        <div class="card-title">申花 滨江紫金府 主卧 朝东 B室</div>
-        <div class="card-traffic auxiliary-text">地铁 1号线</div>
+        <div class="card-title" id="card-title">申花 滨江紫金府 主卧 朝东 B室</div>
+        <!-- <div class="card-traffic auxiliary-text" >地铁 1号线</div> -->
         <div class="card-third">
-            <b class="warning-text weight-text">3200元/月</b>
-            <span class="secondary-text">季付价</span>
-            <a href="payment.html" class="prepay-mode">付款方式</a>
-            <a href="payDeposit.html" class="prepay-money">预付定金</a>
+            <b class="warning-text weight-text" id="sty-price">3200元/月</b>
+            <span class="secondary-text" id="sty-payment">季付价</span>
+            <!-- <a href="payment.html" class="prepay-mode">付款方式</a> -->
+            <!-- <a href="payDeposit.html" class="prepay-money">预付定金</a> -->
         </div>
     </div>
     <div class="card-bottom">
-        <span>咨询电话：400-018-8090</span>
-        <i class="icon-iphone"></i>
+        <span id="tel">咨询电话：400-018-8090</span>
+        <a href="tel:18910340825" class="tel-a"> <i class="icon-iphone"></i> </a> 
     </div>
-    <ul class="card-list-col">
+    <ul class="card-list-col" id="sty-detail">
         <li>
             <label for="">编号：</label>
-            <i for="">33-D</i>
+            <i for="" id="number">33-D</i>
         </li>
         <li>
             <label for="">房型：</label>
-            <i for="">3室一厅</i>
+            <i for="" id="doorModel">3室一厅</i>
         </li>
         <li>
             <label for="">面积：</label>
-            <i for="">13m²</i>
+            <i for="" id="area">13m²</i>
         </li>
         <li>
             <label for="">朝向：</label>
-            <i for="">朝南</i>
-        </li>
-        <li>
-            <label for="">供暖方式：</label>
-            <i for="">集中供暖</i>
+            <i for="" id="direction">朝南</i>
         </li>
     </ul>
-    <div class="card-list">
+    <!-- <div class="card-list">
         <div class="card-title">房屋配置</div>
         <table class="card-table">
             <tbody>
@@ -114,7 +110,7 @@
                 </tr>
             </tbody>
         </table>
-    </div> 
+    </div>  -->
     <div class="card-list">
         <div class="card-title margin-bottom5">每个房间必备家具</div>
         <ul class="card-col4">
@@ -155,7 +151,7 @@
             </li>
         </ul>
     </div>
-    <div class="pull-left margin-bottom78">
+    <!-- <div class="pull-left margin-bottom78">
         <div class="card-title" style="padding:0.1rem;">猜你喜欢</div>
         <ul class="house-item">
            <li>
@@ -177,14 +173,15 @@
                 <span class="house-price warning-text">3000元/月</span>
             </li>
         </ul>
-    </div>
+    </div> -->
     <footer id="footer">
-        <button class="btn-toCall">我要看房</button>
+        <button class="btn-toCall"> <a href="" class="tel-a a-block">我要看房</a></button>
         <button class="btn-toSign">轻松签约</button>
     </footer>
 </body>
 <script type="text/javascript">
-
+    var HOUSE_ID = sty.GetQueryString('id');
+    
     $(document).ready(function(){
 
         /*swiper 自动循环播放*/
@@ -195,21 +192,45 @@
             observer:true,//修改swiper自己或子元素时，自动初始化swiper
             observeParents:true//修改swiper的父元素时，自动初始化swiper
         });
-
-        function getswiper(){
-            var data ={
-                "list":["../imgs/1.jpeg","../imgs/2.jpeg","../imgs/3.jpeg","../imgs/4.jpeg"] 
+         
+        $.ajax({
+          url: sty.baseUrl + '/m3_c2.jsp',
+          type: 'post',
+          data: {v_v1: HOUSE_ID},
+          success: function(data){
+            var content="";
+            if(data.data.length){
+              for(var i=0; i<data.data.length; i++){
+                  content += '<div class="swiper-slide" id="" onclick=""><img src="'+data.data[i].pic+'" ></div>'
+              }
+            }else{
+              content += '<div class="swiper-slide" id="" onclick=""><img alt="暂无图片"></div>'
             }
             
-            var content="";
-            for(var i=0; i<data.list.length; i++){
-                content += '<div class="swiper-slide" id="" onclick=""><img src="'+data.list[i]+'" ></div>'
-            }
+            
             $('.index-top').append(content);
-        } 
-
-        getswiper();
+          }
+        })
         
+        $.ajax({
+          url: sty.baseUrl + '/m3_fyqq1.jsp',
+          type: 'post',
+          data: {v_v1: HOUSE_ID},
+          success: function(data){
+            console.log(data)
+            $('#card-title').html(data.data[0]['pq']+ '&nbsp;&nbsp;' +data.data[0]['skf267']+'&nbsp;&nbsp;' +data.data[0]['skf170'])
+            $('#sty-price').html('￥'+data.data[0]['skf174'])
+            $('#sty-payment').html(data.data[0]['skf169'])
+            $('.tel-a').attr('href','tel:'+data.data[0]['cellphone'])
+            $('#tel').html('咨询电话: '+data.data[0]['cellphone'])
+            
+            $('#direction').html(data.data[0]['skf170'])
+            $('#number').html(HOUSE_ID)
+            $('#doorModel').html(data.data[0]['skf2280'])
+            $('#area').html(data.data[0]['skf171']+'m²')
+          }
+        })
+
         $('.btn-toSign').on('click',function(){
             window.location.href = "onlineOrder.html";
         })

@@ -2,8 +2,9 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>我的合同</title>
+	<title>我的缴费</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <link rel="stylesheet" type="text/css" href="../css/weui.css">
     <link rel="stylesheet" type="text/css" href="../css/reset.css">
     <link rel="stylesheet" type="text/css" href="../css/main.css">
     <script type="text/javascript" src="../js/jquery-3.1.1.min.js"></script>
@@ -12,13 +13,6 @@
 </head>
 <body style="background-color: #f8f8f8;">
     <div id="app">
-        <ul class="tab-lower-line-3">
-            <li class="tab-active">有效</li>
-            <li>违约</li>
-            <li>续签</li>
-            <li>到期</li>
-            <li>作废</li>
-        </ul>
         <div class="tab-list tab-mingxi">
             <ul id="mycontract">
               
@@ -35,17 +29,13 @@
   $(function(){
     var tab = new TabSwitch('.tab-lower-line-3', 'tab-active');
     var contractTypeArys = ['1', '-1', '2', '3', '-2'];
+    $('#mycontract').empty();
+    var len = contractTypeArys.length-2;
 
-    $('.tab-lower-line-3>li').on('click', function(){
-      var index = $(this).index();
-      tab.toSwitch(index, function(data){
-        var type = contractTypeArys[data];
-        getMyContract(type)
-      })
-    })
-
-    getMyContract(contractTypeArys[0])
-
+    for(var i=0; i<len; i++){
+      getMyContract(contractTypeArys[i])
+    }
+    
     function getMyContract(type){
       $.ajax({
           url: sty.baseUrl + '/My_contract2.jsp',
@@ -53,24 +43,28 @@
           data: { v_v2: type, openid: sessionStorage.getItem('openId') },
           success: function(data){
             console.log(data);
-            $('#mycontract').empty();
-
+            
             var content = '';
             var len = data.data.length;
-            console.log(len)
+          
             for(var i=0; i<len; i++){
-              $('#sky-empty').addClass('hide');
-              content += '<li onclick="jump(this)" data-num='+ data.data[i]['skf422'] +'>\
+              
+              content += '<li  data-num='+ data.data[i]['skf422'] +'>\
                     <div class="list-hd">\
                       <span class="tab-list-name">'+ '合同编号: '+data.data[i]['skf820'] +'</span>\
-                      <i class="card-icon icon-right"></i>\
                     </div>\
                     <span class="small-text tab-list-second">'+ data.data[i]['skf1395'] +'</span>\
-                    <span class="small-text tab-list-second">'+'开始: '+data.data[i]['skf427'] + '  结束: '+data.data[i]['skf428']+'</span>\
+                    <span class="small-text tab-list-second">'+'开始: '+data.data[i]['skf427'] + '  结束: '+data.data[i]['skf428']+'</span >\
+                    <p class="btn-class" onclick="jump(this)" data-num='+ data.data[i]['skf422']+'>\
+                       <a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_warn">去缴费</a>\
+                    </p>\
                 </li>'
             }
             $('#mycontract').append(content);
-            if(len==0){
+
+            if($('#mycontract>li').length){
+              $('#sky-empty').addClass('hide');
+            }else{
               $('#sky-empty').removeClass('hide');
             }
           }
@@ -82,7 +76,7 @@
 
   function jump(a){
     var num = $(a).attr('data-num');
-    window.location.href = 'myContractDetail.html?num='+ num
+    window.location.href = 'rentpay.html?num='+ num
   }
   
   function TabSwitch(className, activeName) {

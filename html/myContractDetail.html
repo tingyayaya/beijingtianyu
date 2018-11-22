@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>合同详情</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <link rel="stylesheet" type="text/css" href="../css/weui.css">
+  <link rel="stylesheet" type="text/css" href="../css/reset.css">
+  <link rel="stylesheet" type="text/css" href="../css/main.css">
+  <script type="text/javascript" src="../js/jquery-3.1.1.min.js"></script>
+	<script type="text/javascript" src="../js/main.js"></script>
+	<script type="text/javascript" src="../js/sty.js"></script>
+</head>
+<body style="background-color: #f8f8f8;">
+  <div class="page">
+      <div class="page-header">
+        <h3 id="con-number"></h3>
+        <p>合同编号</p>
+      </div>
+      <div class="weui-panel weui-panel_access">
+          <div class="weui-panel__hd">合同基本信息</div>
+          <div class="weui-panel__bd">
+              <div class="weui-media-box weui-media-box_text">
+                  <h4 class="weui-media-box__title">签约时间</h4>
+                  <p class="weui-media-box__desc" id="con-signdate"></p>
+              </div>
+              <div class="weui-media-box weui-media-box_text">
+                  <h4 class="weui-media-box__title">合同日期</h4>
+                  <p class="weui-media-box__desc" id="con-date"></p>
+              </div>
+              <div class="weui-media-box weui-media-box_text">
+                  <h4 class="weui-media-box__title">经纪人</h4>
+                  <p class="weui-media-box__desc" id="con-agent"></p>
+              </div>
+              <div class="weui-media-box weui-media-box_text">
+                  <h4 class="weui-media-box__title">门店</h4>
+                  <p class="weui-media-box__desc" id="con-store"></p>
+              </div>
+          </div>
+      </div>
+      <div class="weui-panel weui-panel_access">
+          <div class="weui-panel__hd">合同付款协议</div>
+          <div class="weui-panel__bd">
+              <div class="weui-media-box weui-media-box_text">
+                  <h4 class="weui-media-box__title">金额</h4>
+                  <p class="weui-media-box__desc" id="con-amount"></p>
+              </div>
+              <div class="weui-media-box weui-media-box_text">
+                  <h4 class="weui-media-box__title">付款方式</h4>
+                  <p class="weui-media-box__desc" id="con-payment"></p>
+              </div>
+              <div class="weui-media-box weui-media-box_text">
+                  <h4 class="weui-media-box__title">提前付款天数</h4>
+                  <p class="weui-media-box__desc" id="con-day"></p>
+              </div>
+              <div class="weui-panel__ft">
+                  <a id="jumpToPayRent" class="weui-cell weui-cell_access weui-cell_link">
+                      <div class="weui-cell__bd">房租缴费</div>
+                      <span class="weui-cell__ft"></span>
+                  </a>    
+              </div>
+          </div>
+      </div>
+      <div class="page__ft">
+          <p href="javascript:home()">-- end --</p>
+      </div>
+  </div>
+    
+</body>
+<script type="text/javascript">
+  
+
+
+  $(function(){
+    var NUM = sty.GetQueryString('num');
+    
+    $.ajax({
+      url: sty.baseUrl + '/m5_c1.jsp',
+      type: 'post',
+      data: { v_v1: NUM},
+      success: function(data){
+        var mydata = data.data[0];
+        $('#con-number').html(mydata['skf820']);
+        $('#con-signdate').html(mydata['skf1397']);
+        $('#con-date').html('开始: '+mydata['skf427']+'&nbsp;&nbsp;结束: '+mydata['skf428']);
+        $('#con-agent').html(mydata['skf2266']);
+        $('#con-store').html(mydata['skf33685787']);
+      }
+    })
+    $.ajax({
+      url: sty.baseUrl + '/m5_c2.jsp',
+      type: 'post',
+      data: { v_v1: NUM},
+      success: function(data){
+        var mydata = data.data[0];
+        $('#con-amount').html(mydata['skf770']);
+        $('#con-payment').html(mydata['pay_m']);
+        $('#con-day').html(mydata['skf769']);
+      }
+    })
+
+    $('#jumpToPayRent').attr('href', 'rentPay.html?num='+ NUM)
+  })
+
+  
+</script>
+</html>

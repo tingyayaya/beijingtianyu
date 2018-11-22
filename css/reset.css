@@ -31,6 +31,7 @@ input, button, select, textarea {
     appearance: none;
     border-radius: 0;
     border: none;
+    background: #fff;
 }
 
 /*最小字体的解决*/

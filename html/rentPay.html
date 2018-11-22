@@ -2,11 +2,15 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>爱丽屋</title>
+	<title>缴费</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <link rel="stylesheet" type="text/css" href="../css/reset.css">
-	<link rel="stylesheet" type="text/css" href="../css/main.css">
-    <script type="text/javascript" src="../js/jquery-3.1.1.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="../css/weui.css">
+  <link rel="stylesheet" type="text/css" href="../css/reset.css">
+  <link rel="stylesheet" type="text/css" href="../css/main.css">
+  <!-- 判断浏览器返回不同polyfill文件 -->
+  <script src="https://cdn.polyfill.io/v2/polyfill.js?features=es6"></script>
+  <script type="text/javascript" src="../js/jquery-3.1.1.min.js"></script>
+  <script type="text/javascript" src="../js/weui.js"></script>
 	<script type="text/javascript" src="../js/main.js"></script>
 	<script type="text/javascript" src="../js/sty.js"></script>
 </head>
@@ -14,128 +18,303 @@
 <div class="position-fixed">
     <div class="card-list card-bottom head-label">
         <i class="icon-label icon-3 pull-left"></i>
-        <span class="label-title">教工家园-20幢2单元0601号</span>
-        <span class="secondary-text">3200元/月</span>
+        <span class="label-title" id="con-address"></span>
+        <span class="secondary-text" id="con-date"></span>
     </div>
     <ul class="tab-lower-line">
         <li class="tab-active">未支付</li>
         <li>已支付</li>
     </ul>
 </div>
-
 <div class="contain-margin2">
-    <div class="tab-list tab-zhifu">
-        <ul>
-            <span>2017年7月</span>
-            <li>
-                <input type="checkbox" class="check1">
-                <b class="tab-list-main">￥2056</b>
-                <span class="tab-list-name">房屋租金</span>
-                <span class="small-text tab-list-second">2017-06</span>
-                <a class="warning-text">未支付</a>
-            </li>
-            <li>
-                <input type="checkbox" class="check1">
-                <b class="tab-list-main">￥360</b>
-                <span class="tab-list-name">杂费</span>
-                <span class="small-text tab-list-second">2017-06</span>
-                 <a class="warning-text">未支付</a>
-            </li>
-        </ul>
-        <ul>
-            <span>2017年7月</span>
-            <li>
-                <input type="checkbox" class="check1">
-                <b class="tab-list-main">￥2056</b>
-                <span class="tab-list-name">房屋租金</span>
-                <span class="small-text tab-list-second">2017-06</span>
-                <a class="warning-text">未支付</a>
-            </li>
-            <li>
-                <input type="checkbox" class="check1">
-                <b class="tab-list-main">￥360</b>
-                <span class="tab-list-name">杂费</span>
-                <span class="small-text tab-list-second">2017-06</span>
-                 <a class="warning-text">未支付</a>
-            </li>
-        </ul>
-        <ul>
-            <span>2017年7月</span>
-            <li>
-                <input type="checkbox" class="check1">
-                <b class="tab-list-main">￥2056</b>
-                <span class="tab-list-name">房屋租金</span>
-                <span class="small-text tab-list-second">2017-06</span>
-                <a class="warning-text">未支付</a>
-            </li>
-            <li>
-                <input type="checkbox" class="check1">
-                <b class="tab-list-main">￥360</b>
-                <span class="tab-list-name">杂费</span>
-                <span class="small-text tab-list-second">2017-06</span>
-                 <a class="warning-text">未支付</a>
-            </li>
-        </ul>
-        <ul>
-            <span>2017年7月</span>
-            <li>
-                <input type="checkbox" class="check1">
-                <b class="tab-list-main">￥2056</b>
-                <span class="tab-list-name">房屋租金</span>
-                <span class="small-text tab-list-second">2017-06</span>
-                <a class="warning-text">未支付</a>
-            </li>
-            <li>
-                <input type="checkbox" class="check1">
-                <b class="tab-list-main">￥360</b>
-                <span class="tab-list-name">杂费</span>
-                <span class="small-text tab-list-second">2017-06</span>
-                 <a class="warning-text">未支付</a>
-            </li>
-        </ul>
-    </div>
+    <div class="tab-list tab-zhifu"></div>
     <footer id="footer" class="footer-tab">
-            <input type="checkbox" class="check2">
+            <input type="checkbox" class="check2" onclick="checkOne()">
             <span class="checkname">全选</span>
-            <button class="btn-right pull-right marginLeft">去支付</button>
-            <span class="pull-right auxiliary-text">已选<span class="checknum">0</span>条</span>
+            <button class=" pull-right marginLeft btn-disabled" id ='buttonpay' onclick="paybtn()">去支付</button>
+            <span class="pull-right auxiliary-text warning-text">￥<span class="checknum">0</span></span>
     </footer>
 </div>
 
 <div class="contain-margin2  hide">
-    <div class="tab-list tab-mingxi">
-        <ul>
-            <span>2017年7月</span>
-            <li>
-                <span class="tab-list-name">房屋租金</span>
-                <span class="small-text tab-list-second">2017-06</span>
-                <b class="tab-list-main">￥2056</b>
-            </li>
-            <li>
-                <span class="tab-list-name">杂费</span>
-                <span class="small-text tab-list-second">2017-06</span>
-                <b class="tab-list-main">￥360</b>
-            </li>
-        </ul>
-        <ul>
-            <span>2017年7月</span>
-            <li>
-                <span class="tab-list-name">房屋租金</span>
-                <span class="small-text tab-list-second">2017-06</span>
-                <b class="tab-list-main">￥2056</b>
-            </li>
-            <li>
-                <span class="tab-list-name">杂费</span>
-                <span class="small-text tab-list-second">2017-06</span>
-                <b class="tab-list-main">￥360</b>
-            </li>
-        </ul>
-    </div>
+    <div class="tab-list tab-mingxi"></div>
+</div>
+
+<div class="sky-empty hide" id="sky-empty">
+  <i class="sky-bg-empty-list sky-bg"></i>
+  <p class="sky-font">没有改列表</p>
 </div>
 
 </body>
 <script type="text/javascript" src="../js/aui-tab.js" ></script>
 <script type="text/javascript">
+
+    //alert(1)
+
+    $(function(){
+      var NUM = sty.GetQueryString('num');
+      var payType = [0, 1];
+      getUnPayment(NUM)
+      getPayment(NUM)
+
+       $.ajax({
+          url: sty.baseUrl + '/m5_c1.jsp',
+          type: 'post',
+          data: { v_v1: NUM},
+          success: function(data){
+            var mydata = data.data[0];
+            $('#con-address').html(mydata['skf1395']);
+            $('#con-date').html(mydata['skf427']+'&nbsp;&nbsp;到&nbsp;&nbsp;'+mydata['skf428']);
+          }
+        })
+    })
+    //付钱
+    var totalAry = [];
+    var total = 0;
+
+    function calBtn() {
+      totalAry.length =0;
+      total = 0;
+      $('.check1').each(function(){
+            if($(this).prop('checked')==true){
+              var price = $(this).siblings('#price').html().replace('￥','')
+              totalAry.push({
+                id: $(this).attr('id'),
+                price: parseFloat(price),
+              })
+              total += parseFloat(price)
+            }
+      })
+      if(totalAry.length){
+        $('.checknum').html(total);
+      }else{
+        $('.checknum').html(0);
+      }
+    }
+  
+   
+    function paybtn(){
+      var len = totalAry.length;
+      var TIME0 = (new Date()).getTime();
+
+      if(len){
+        var ordernum = ''
+        ordernum = totalAry[0]['id']+TIME0;
+
+        //upadateI(ordernum)
+        pay(ordernum, total)
+      }
+     
+    }
+
+  
+    function upadateI(ordernum){
+      var promise = totalAry.map(function(item){
+        
+        var params = { v_911: parseFloat(total), v_455: getDate(), v_316: item['id'], v_1958: ordernum}
+        //alert(params)
+        return updateOrder(params)
+      })
+
+      Promise.all(promise).then(function(result){
+        location.reload();
+      })
+    } 
+
+    //充值开始执行
+    function pay(ordernum, total){
+      var openid  = sessionStorage.getItem("openId");
+      var amount = parseFloat(total);
+      
+      var amount1 = parseInt(amount*100);
+      var url = sty.payurl+"pay";
+      
+      var param= {
+        auth_code:"",
+        out_trade_no:ordernum,
+        amount:1,
+        title:"缴费",
+        body:"缴费",
+        terminal:"sy001",
+        operuser:"xt001",
+        isp:"WEIXIN_PUB",
+        pay_type:"JS",
+        openid:openid,
+        token:'AYAK8CF0FNZ0'
+      }
+      $.ajax({
+        url:url,
+        type: "POST",
+        contentType: "application/json; charset=utf-8",
+        data: JSON.stringify(param),
+        dataType: "JSON",
+        success: function (message) {
+          payback(message);//吊起支付
+        },error:function(e){
+          
+        }
+      })
+
+      /**调起支付*/
+      function payback(data){
+        
+        var d = null;
+        if(data.code==0){
+          d = data.data;
+        }else{
+          return;
+        }
+       
+        if (typeof WeixinJSBridge == "undefined"){
+          weui.alert("请在微信公众号内操作！");
+          return;
+        }
+        
+        WeixinJSBridge.invoke(
+            'getBrandWCPayRequest', {
+                "appId":d.appId,     //公众号名称，由商户传入     
+                "timeStamp":d.timeStamp,         //时间戳，自1970年以来的秒数     
+                "nonceStr":d.nonceStr, //随机串     
+                "package":d.package,
+                "signType":d.signType,         //微信签名方式：     
+                "paySign":d.paySign //微信签名 
+            },
+            function(res){ 
+                if(res.err_msg == "get_brand_wcpay_request:ok") {
+                 
+                  //weui.alert("支付完成");
+
+                  upadateI(ordernum)
+                  
+
+                }   // 使用以上方式判断前端返回,微信团队郑重提示：res.err_msg将在用户支付成功后返回    ok，但并不保证它绝对可靠。 
+              if(res.err_msg!="get_brand_wcpay_request:cancel"&&res.err_msg!="get_brand_wcpay_request:fail"){
+                
+              }
+              if(res.err_msg == "get_brand_wcpay_request:cancel"){
+                weui.alert("取消");
+                }
+                if(res.err_msg == "get_brand_wcpay_request:fail"){
+                  weui.alert("支付初始化失败");
+                }
+            }
+        );
+      }
+    }
+     /**
+     * 获取时间
+     */
+     function formatNum(num){
+       return num.toString().replace(/^(\d)$/, '0$1');
+     }
+     function getDate(){
+       var date = new Date();
+       return date.getFullYear() + '-' + formatNum(date.getMonth() + 1) + '-' + formatNum(date.getDate())
+     }
+     
+    /**
+     * 更新订单状态
+     */
+     function updateOrder(data){
+      return new Promise(function(resolve){
+        // var timer = setTimeout(function(){
+        //   console.log(param)
+        //   resolve(param)
+        // },3000)
+        //alert(JSON.stringify(data))
+        var url = sty.baseUrl +"/m6_c1.jsp";
+        $.ajax({
+          url : url,
+          type: 'post',
+          data: data,
+          success: function(data){
+            resolve(data)
+          }
+        })
+      })
+        
+    }
+    
+   
+    function getPayment(NUM){
+
+      $.ajax({
+        url: sty.baseUrl + '/m5_c3.jsp',
+        type: 'post',
+        data: { v_v1: NUM, v_v2: 1},
+        success: function(data){
+          console.log(data)
+          var len = data.data.length;
+          $('.tab-mingxi').empty();
+          var content = ''
+          for(var i=0; i<len; i++){
+            content += '<ul>\
+                    <span>'+ data.data[i]['skf456']+'</span>\
+                    <li>\
+                        <span class="tab-list-name">'+data.data[i]['skf881']+'</span>\
+                        <span class="small-text tab-list-second">'+'实收金额日期:  '+data.data[i]['skf455']+'</span>\
+                        <b class="tab-list-main">'+'￥'+data.data[i]['skf911']+'</b>\
+                    </li>\
+                </ul>'
+          }
+          $('.tab-mingxi').append(content);
+          
+        }
+      })
+ 
+    }
+
+    
+
+    function Array2Json(arr, obj = {}) {
+        arr.forEach(item => {
+            obj[item.id] = item;
+        })
+
+        return obj
+    }
+
+    
+    function getUnPayment(NUM){
+
+      $.ajax({
+        url: sty.baseUrl + '/m5_c3.jsp',
+        type: 'post',
+        data: { v_v1: NUM, v_v2: 0},
+        success: function(data){
+          
+          var len = data.data.length;
+          $('.tab-zhifu').empty();
+          var content = ''
+          for(var i=0; i<len; i++){
+            content += '<ul>\
+                  <span>'+ data.data[i]['skf456'] +'</span>\
+                    <li>\
+                        <input type="checkbox" class="check1" onclick="checkOne()" id='+ data.data[i]['skf316'] +'>\
+                        <b class="tab-list-main" id="price">'+'￥'+data.data[i]['skf323']+'</b>\
+                        <span class="tab-list-name" id="type">'+data.data[i]['skf881']+'</span>\
+                        <span class="small-text tab-list-second">'+'预收支日期:  '+data.data[i]['skf322'] +'</span>\
+                    </li>\
+                  </ul>'
+          }
+          $('.tab-zhifu').append(content);
+          
+          if(len){
+            $('#sky-empty').addClass('hide')
+          }else{
+            $('#sky-empty').removeClass('hide')
+          }
+        }
+      })
+
+      
+    }
+    
+    function checkOne(){
+        chknum();
+        calBtn();
+    }
+
     var tab = new auiTab({
         element: $('.tab-lower-line')[0], //document.getElementById("footer")
         index:1,
@@ -144,24 +323,39 @@
         if(ret.index==2){
             $('.contain-margin2').eq(0).addClass('hide');
             $('.contain-margin2').eq(1).removeClass('hide');
+            var len = $('.tab-mingxi>ul').length;
+            if(len){
+              $('#sky-empty').addClass('hide')
+            }else{
+              $('#sky-empty').removeClass('hide')
+            }
            
         }else if(ret.index==1){
+          var len = $('.tab-zhifu>ul').length;
+            if(len){
+              $('#sky-empty').addClass('hide')
+            }else{
+              $('#sky-empty').removeClass('hide')
+            }
             $('.contain-margin2').eq(1).addClass('hide');
             $('.contain-margin2').eq(0).removeClass('hide');
         }
     });
     
+    
+
     $('.check2').on('click',function(){
         if(this.checked){
             $('.check1').each(function () {  
-                $(this).prop("checked", true);  
+                $(this).prop("checked", false); 
             });
         }else{
             $('.check1').each(function () {  
-                $(this).prop("checked", false); 
+                $(this).prop("checked", true); 
             });
         }
         chknum();
+        calBtn()
     })
     
     function chknum(){
@@ -169,14 +363,23 @@
         $('.check1').each(function(){
             if($(this).prop('checked')==true){
                 chknum++;
-                
             }
         })
-        $('.checknum').html(chknum);
+        if($('.check1').length == chknum){
+          $('.check2').prop("checked", true)
+        }else{
+          $('.check2').prop("checked", false)
+        }
+        
+        if(chknum !=0 ){
+          $('#buttonpay').removeClass('btn-disabled').addClass('btn-right')
+        }else{
+          $('#buttonpay').addClass('btn-disabled').removeClass('btn-right')
+        }
+
+        
     }
     
-    $('.check1').on('click',function(){
-        chknum();
-    })
+    
 </script>
 </html>

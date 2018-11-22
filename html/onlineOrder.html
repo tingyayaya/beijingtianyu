@@ -6,33 +6,100 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <link rel="stylesheet" type="text/css" href="../css/reset.css">
 	<link rel="stylesheet" type="text/css" href="../css/main.css">
-    <script type="text/javascript" src="../js/jquery-3.1.1.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="../css/weui.css">
+  <script type="text/javascript" src="../js/jquery-3.1.1.min.js"></script>
 	<script type="text/javascript" src="../js/main.js"></script>
-	<script type="text/javascript" src="../js/sty.js"></script>
+  <script type="text/javascript" src="../js/sty.js"></script>
+  <script type="text/javascript" src="../js/weui.js"></script>
 </head>
 <body>
-<div class="container padding-40">
+<div class="container padding-40" id="form">
     <h4 class="title">请填写真实信息,我们会尽快与您联系</h4>
     <div class="input-list">
+      <label for="name">姓名</label>
+      <input id="name" type="text" required tips="请输入姓名">
+    </div>
+    <div class="input-list">
         <label for="phone">电话</label>
-        <input id="phone" type="tel">
+        <input id="phone" type="tel" pattern="REG_TEL" tips="请输入手机号" required>
     </div>
     <div class="input-list">
-        <label for="area">预约区域 <span class="secondary-text">可填写地铁、商圈、小区</span></label>
-        <input id="area" type="text">
-    </div>
-    <div class="input-list">
-        <label for="price">租房预算</label>
-        <input id="price" type="text">
+        <label for="demand">需求 <span class="secondary-text">可填写地铁、商圈、小区、价格要求等</span></label>
+        <textarea id="demand" required tips="请输入需求"></textarea>
     </div>
     <div></div>
-    <button class="btn-large primary-btn">提交</button>
+    <button class="btn-large primary-btn" id="showIOSDialog2">提交</button>
+    <div class="js_dialog" id="iosDialog2" style="display: none;">
+      <div class="weui-mask"></div>
+      <div class="weui-dialog">
+          <div class="weui-dialog__bd">预约成功，客服人员将在三个工作日内回访</div>
+          <div class="weui-dialog__ft">
+              <a href="index.html" class="weui-dialog__btn weui-dialog__btn_primary" id="comfirm">知道了</a>
+          </div>
+      </div>
+    </div>
 </div>
+
 </body>
 <script type="text/javascript">
 
     $(document).ready(function(){
        
+        var $iosDialog2 = $('#iosDialog2');
+        
+
+        $('#showIOSDialog2').on('click', function(){
+          validate()
+        });
+        
+        $('#iosDialog2').on('click', '.weui-dialog__btn', function(){
+            $(this).parents('.js_dialog').fadeOut(200);
+            window.location.href = 'index.html'
+        });
+
+        function validate(){
+          console.log(name)
+          weui.form.validate('#form', function(error){
+            
+            if(!error){
+              var loading = weui.loading('提交中...');
+              // setTimeout(function () {
+              //     loading.hide();
+              //     weui.toast('提交成功', 3000);
+              // }, 1500);
+              var name = $('#name').val()
+              var tel = $('#phone').val()
+              var demand = $('#demand').val()
+              
+              $.ajax({
+                url: sty.baseUrl+ '/m7_c1.jsp',
+                type: 'post',
+                data: {
+                  'skt19.skf200':name,
+                  'skt19.skf201':tel,
+                  'skt19.skf409':demand,
+                },
+                success: function(data){
+                  console.log(data)
+                  if(data.code==0&&data.msg=='成功'){
+                    loading.hide();
+                    $iosDialog2.fadeIn(200);
+                  }
+                }
+              })
+            }
+          },{
+            regexp: {
+              TEL: /^1[3|4|5|7|8][0-9]{9}$/
+            }
+
+          })
+          
+          // weui.form.showErrorTips({
+          //     ele: document.getElementById("name"),
+          //     msg: 'empty'
+          // });
+        }
     })
 
 </script>

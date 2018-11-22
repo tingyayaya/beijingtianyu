@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>爱丽屋</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <link rel="stylesheet" type="text/css" href="../css/reset.css">
+	<link rel="stylesheet" type="text/css" href="../css/main.css">
+    <script type="text/javascript" src="../js/jquery-3.1.1.min.js"></script>
+	<script type="text/javascript" src="../js/main.js"></script>
+	<script type="text/javascript" src="../js/sty.js"></script>
+</head>
+<body class="grey-bg">
+<div class="position-fixed">
+    <div class="card-list card-bottom head-label">
+        <i class="icon-label icon-3 pull-left"></i>
+        <span class="label-title" id="con-address"></span>
+        <span class="secondary-text" id="con-date"></span>
+    </div>
+    <ul class="tab-lower-line">
+        <li class="tab-active">未支付</li>
+        <li>已支付</li>
+    </ul>
+</div>
+
+<div class="contain-margin2">
+    <div class="tab-list tab-zhifu">
+        <!-- <ul>
+            <span>2017年7月</span>
+            <li>
+                <input type="checkbox" class="check1" onclick="checkOne()" id="122">
+                <b class="tab-list-main" id="price">￥360</b>
+                <span class="tab-list-name">杂费</span>
+                <span class="small-text tab-list-second">2017-06</span>
+            </li>
+        </ul>
+        <ul>
+            <span>2017年7月</span>
+            <li>
+                <input type="checkbox" class="check1" onclick="checkOne()" id="123">
+                <b class="tab-list-main" id="price">￥2056</b>
+                <span class="tab-list-name">房屋租金</span>
+                <span class="small-text tab-list-second">2017-06</span>
+              
+            </li>
+            <li>
+                <input type="checkbox" class="check1" onclick="checkOne()" id="124">
+                <b class="tab-list-main" id="price">￥360</b>
+                <span class="tab-list-name">杂费</span>
+                <span class="small-text tab-list-second">2017-06</span>
+               
+            </li>
+        </ul> -->
+    </div>
+    <footer id="footer" class="footer-tab">
+            <input type="checkbox" class="check2" onclick="checkOne()">
+            <span class="checkname">全选</span>
+            <button class=" pull-right marginLeft btn-disabled" id ='buttonpay' onclick="pay()">去支付</button>
+            <span class="pull-right auxiliary-text warning-text">￥<span class="checknum">0</span></span>
+    </footer>
+</div>
+
+<div class="contain-margin2  hide">
+    <div class="tab-list tab-mingxi">
+        <!-- <ul>
+            <span>2017年7月</span>
+            <li>
+                <span class="tab-list-name">房屋租金</span>
+                <span class="small-text tab-list-second">2017-06</span>
+                <b class="tab-list-main">￥2056</b>
+            </li>
+            <li>
+                <span class="tab-list-name">杂费</span>
+                <span class="small-text tab-list-second">2017-06</span>
+                <b class="tab-list-main">￥360</b>
+            </li>
+        </ul>
+         -->
+    </div>
+</div>
+
+</body>
+<script type="text/javascript" src="../js/aui-tab.js" ></script>
+<script type="text/javascript">
+
+    $(function(){
+      var NUM = sty.GetQueryString('num')
+      var payType = [0, 1];
+      getUnPayment(NUM)
+      getPayment(NUM)
+
+       $.ajax({
+          url: sty.baseUrl + '/m5_c1.jsp',
+          type: 'post',
+          data: { v_v1: NUM},
+          success: function(data){
+            var mydata = data.data[0];
+            $('#con-address').html(mydata['skf1395']);
+            $('#con-date').html(mydata['skf427']+'&nbsp;&nbsp;到&nbsp;&nbsp;'+mydata['skf428']);
+          }
+        })
+    })
+    
+    function getPayment(NUM){
+
+      $.ajax({
+        url: sty.baseUrl + '/m5_c3.jsp',
+        type: 'post',
+        data: { v_v1: NUM, v_v2: 1},
+        success: function(data){
+          console.log(data)
+          var len = data.data.length;
+          $('.tab-mingxi').empty();
+          var content = ''
+          for(var i=0; i<len; i++){
+            content += '<ul>\
+                    <span>'+ data.data[i]['skf456']+'</span>\
+                    <li>\
+                        <span class="tab-list-name">'+data.data[i]['skf881']+'</span>\
+                        <span class="small-text tab-list-second">'+'实收金额日期:  '+data.data[i]['skf455']+'</span>\
+                        <b class="tab-list-main">'+'￥'+data.data[i]['skf911']+'</b>\
+                    </li>\
+                </ul>'
+          }
+          $('.tab-mingxi').append(content);
+        }
+      })
+ 
+    }
+    
+
+    function Array2Json(arr, obj = {}) {
+        arr.forEach(item => {
+            obj[item.id] = item;
+        })
+
+        return obj
+    }
+
+    function pay() {
+      var totalAry = [];
+      var total = 0;
+      $('.check1').each(function(){
+            if($(this).prop('checked')==true){
+              var price = $(this).siblings('#price').html().replace('￥','')
+              totalAry.push({
+                id: $(this).attr('id'),
+                price: parseFloat(price)
+              })
+              total += parseFloat(price)
+            }
+      })
+      if(totalAry.length){
+        //console.log(totalAry)
+        $('.checknum').html(total);
+      }else{
+        $('.checknum').html(0);
+      }
+     
+    }
+
+    function getUnPayment(NUM){
+
+      $.ajax({
+        url: sty.baseUrl + '/m5_c3.jsp',
+        type: 'post',
+        data: { v_v1: NUM, v_v2: 0},
+        success: function(data){
+          
+          var len = data.data.length;
+          $('.tab-zhifu').empty();
+          var content = ''
+          for(var i=0; i<len; i++){
+            content += '<ul>\
+                  <span>'+ data.data[i]['skf456'] +'</span>\
+                    <li>\
+                        <input type="checkbox" class="check1" onclick="checkOne()" id='+ data.data[i]['skf316'] +'>\
+                        <b class="tab-list-main" id="price">'+'￥'+data.data[i]['skf323']+'</b>\
+                        <span class="tab-list-name">'+data.data[i]['skf881']+'</span>\
+                        <span class="small-text tab-list-second">'+'预收支日期:  '+data.data[i]['skf322'] +'</span>\
+                    </li>\
+                  </ul>'
+          }
+          $('.tab-zhifu').append(content);
+        }
+      })
+
+      
+    }
+    
+    function checkOne(){
+        chknum();
+        pay();
+    }
+
+    var tab = new auiTab({
+        element: $('.tab-lower-line')[0], //document.getElementById("footer")
+        index:1,
+        repeatClick:false
+    },function(ret){
+        if(ret.index==2){
+            $('.contain-margin2').eq(0).addClass('hide');
+            $('.contain-margin2').eq(1).removeClass('hide');
+           
+        }else if(ret.index==1){
+            $('.contain-margin2').eq(1).addClass('hide');
+            $('.contain-margin2').eq(0).removeClass('hide');
+        }
+    });
+    
+    
+
+    $('.check2').on('click',function(){
+        if(this.checked){
+            $('.check1').each(function () {  
+                $(this).prop("checked", false); 
+            });
+        }else{
+            $('.check1').each(function () {  
+                $(this).prop("checked", true); 
+            });
+        }
+        chknum();
+        pay()
+    })
+    
+    function chknum(){
+        var chknum=0;
+        $('.check1').each(function(){
+            if($(this).prop('checked')==true){
+                chknum++;
+            }
+        })
+        if($('.check1').length == chknum){
+          $('.check2').prop("checked", true)
+        }else{
+          $('.check2').prop("checked", false)
+        }
+        
+        if(chknum !=0 ){
+          $('#buttonpay').removeClass('btn-disabled').addClass('btn-right')
+        }else{
+          $('#buttonpay').addClass('btn-disabled').removeClass('btn-right')
+        }
+
+        
+    }
+    
+    
+</script>
+</html>

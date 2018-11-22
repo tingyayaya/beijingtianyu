@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    var arr = [1, 2, 3]
+    const getRandom = () => +(Math.random()*1000).toFixed(0);
+
+    const asyncTask = taskID => new Promise(resolve => {
+        let timeout = getRandom();
+        console.log(`taskID=${taskID} start.`);
+        setTimeout(function() {
+            console.log(`taskID=${taskID} finished in time=${timeout}.`);
+            resolve(taskID)
+        }, timeout);
+    });
+    
+    var promise = arr.map(function(item){
+      return asyncTask(item)
+    })
+    Promise.all(promise)
+    .then(resultList => {
+        console.log('results:',resultList);
+    });
+  </script>
+</body>
+</html>
